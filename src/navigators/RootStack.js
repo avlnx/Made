@@ -1,5 +1,5 @@
 import {StackNavigator} from 'react-navigation';
-import {LoggedOutStack} from './index';
+import {LoggedOutStack, LoggedInStack} from './index';
 import {OnboardingScreen} from '../components/screens';
 
 const RootStack = StackNavigator(
@@ -8,7 +8,7 @@ const RootStack = StackNavigator(
         screen: LoggedOutStack,
       },
       LoggedInStack: {
-        screen: OnboardingScreen,
+        screen: LoggedInStack,
       },
     },
     {

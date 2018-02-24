@@ -11,7 +11,7 @@ const LoggedOutStack = StackNavigator(
       },
     },
     {
-      headerMode: 'none',
+      // headerMode: 'none',
     },
 );
 
