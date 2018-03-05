@@ -1,4 +1,5 @@
 import React from 'react';
+import {bindActionCreators} from 'redux';
 import {
   Container,
   Header,
@@ -14,13 +15,22 @@ import {
   View,
 } from 'native-base';
 import {getResetAndNavigateActionTo} from '../../navigators/';
+import * as authActions from '../../actions/authActions';
+import {connect} from 'react-redux';
 
 class LoginScreen extends React.Component {
   static navigationOptions = {
     title: 'Login',
   };
 
+  debugLogUserIn() {
+    // TODO replace with actual firebase stuff later, this is here for testing
+    this.props.actions.logIn();
+  }
+
   resetAndNavigate(routeName) {
+    // TODO temp test hack, actually log in with firebase
+    this.debugLogUserIn();
     const action = getResetAndNavigateActionTo(routeName);
     this.props.navigation.dispatch(action);
   }
@@ -66,5 +76,15 @@ class LoginScreen extends React.Component {
     );
   }
 }
+
+// export {LoginScreen};
+
+LoginScreen = connect(state => ({
+      isLoggedIn: state.auth.isLoggedIn
+    }),
+    (dispatch) => ({
+      actions: bindActionCreators(authActions, dispatch)
+    })
+)(LoginScreen);
 
 export {LoginScreen};

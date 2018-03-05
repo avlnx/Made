@@ -1,9 +1,12 @@
 import {StackNavigator} from 'react-navigation';
 import {LoggedOutStack, LoggedInStack} from './index';
-import {OnboardingScreen} from '../components/screens';
+import {SplashScreen} from '../components/screens';
 
 const RootStack = StackNavigator(
     {
+      Splash: {
+        screen: SplashScreen,
+      },
       LoggedOutStack: {
         screen: LoggedOutStack,
       },

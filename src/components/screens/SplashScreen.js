@@ -1,42 +1,38 @@
-import React from 'react';
-import {
-  Container,
-  Content,
-  H1,
-  H2,
-  Button,
-  Text,
-  Icon,
-  View,
-} from 'native-base';
+import React, {Component} from 'react';
+import {Spinner} from 'native-base';
+import {getResetAndNavigateActionTo} from '../../navigators/';
+import * as authActions from '../../actions/authActions';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-class SplashScreen extends React.Component {
-  static navigationOptions = {
-    header: null
-  };
+class SplashScreen extends Component {
+  resetAndNavigate(routeName) {
+    const action = getResetAndNavigateActionTo(routeName);
+    this.props.navigation.dispatch(action);
+  }
+
+  componentDidMount() {
+    let route = 'LoggedOutStack';
+    if (this.props.isLoggedIn) {
+      // redirect to LoggedInStack if logged in
+      route = 'LoggedInStack';
+    }
+    this.resetAndNavigate(route);
+  }
 
   render() {
     return (
-        <Container>
-          <View style={{flex: 1, padding: 10}}>
-            <View style={{flex: 4, justifyContent: 'center'}}>
-              <Text style={{textAlign: 'center', fontSize: 92}}>HERMES</Text>
-              <Text style={{textAlign: 'center', fontSize: 36}}>A primeira
-                solução completa de self-checkout orgulhosamente
-                brasileira.</Text>
-            </View>
-            <View style={{flex: 1, justifyContent: 'center'}}>
-              <Button block iconRight
-                      onPress={() => this.props.navigation.navigate('Login')}
-              >
-                <Text>Vamos Começar</Text>
-                <Icon name='arrow-forward'/>
-              </Button>
-            </View>
-          </View>
-        </Container>
-    );
+        <Spinner />
+    )
   }
 }
+
+SplashScreen = connect(state => ({
+      isLoggedIn: state.auth.isLoggedIn
+    }),
+    (dispatch) => ({
+      actions: bindActionCreators(authActions, dispatch)
+    })
+)(SplashScreen);
 
 export {SplashScreen};
