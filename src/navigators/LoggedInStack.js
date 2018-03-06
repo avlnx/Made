@@ -2,7 +2,7 @@ import {StackNavigator} from 'react-navigation';
 import {
   OnboardingScreen,
   DashboardScreen, NewPOSScreen, AddProductsToPOSScreen,
-} from '../components/screens';
+} from '../screens';
 
 const LoggedInStack = StackNavigator(
     {

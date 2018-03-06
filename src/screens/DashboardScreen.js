@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Content, H1, H2, Button, Text, View} from 'native-base';
-import {getResetAndNavigateActionTo} from '../../navigators';
+import {getResetAndNavigateActionTo} from '../navigators/index';
 
 class DashboardScreen extends React.Component {
   static navigationOptions = {

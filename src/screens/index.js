@@ -1,4 +1,3 @@
-export * from './SplashScreen';
 export * from './WelcomeScreen';
 export * from './LoginScreen';
 export * from './OnboardingScreen';

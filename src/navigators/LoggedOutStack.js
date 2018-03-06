@@ -1,5 +1,5 @@
 import {StackNavigator} from 'react-navigation';
-import {LoginScreen, WelcomeScreen} from '../components/screens';
+import {LoginScreen, WelcomeScreen} from '../screens';
 
 const LoggedOutStack = StackNavigator(
     {
@@ -11,6 +11,7 @@ const LoggedOutStack = StackNavigator(
       },
     },
     {
+      initialScreen: 'Welcome'
       // headerMode: 'none',
     },
 );

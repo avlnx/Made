@@ -9,30 +9,11 @@ import {
   Icon,
   View,
 } from 'native-base';
-// import {bindActionCreators} from 'redux';
-// import * as authActions from '../../actions/authActions';
-// import {connect} from 'react-redux';
-// import {getResetAndNavigateActionTo} from '../../navigators';
 
 class WelcomeScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
-
-  // resetAndNavigate(routeName) {
-  //   const action = getResetAndNavigateActionTo(routeName);
-  //   this.props.navigation.dispatch(action);
-  // }
-
-  // // Before doing anything, are we logged in already? This is where
-  // // we decide if we should redirect the user or let him login
-  // componentWillMount() {
-  //   const {isLoggedIn} = this.props;
-  //   if (isLoggedIn) {
-  //     // User is already logged in, reset to LoggedInStack
-  //     this.resetAndNavigate('LoggedInStack');
-  //   }
-  // }
 
   render() {
     return (
@@ -57,14 +38,5 @@ class WelcomeScreen extends React.Component {
     );
   }
 }
-
-// SplashScreen = connect(state => ({
-//       isLoggedIn: state.auth.isLoggedIn
-//     }),
-//     (dispatch) => ({
-//       actions: bindActionCreators(authActions, dispatch)
-//     })
-// )(SplashScreen);
-//
 
 export {WelcomeScreen};

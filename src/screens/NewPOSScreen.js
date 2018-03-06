@@ -14,7 +14,7 @@ import {
   Input,
   Label,
 } from 'native-base';
-import {getResetAndNavigateActionTo} from '../../navigators';
+import {getResetAndNavigateActionTo} from '../navigators/index';
 
 class NewPOSScreen extends React.Component {
   static navigationOptions = {

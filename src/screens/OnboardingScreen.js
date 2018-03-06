@@ -10,19 +10,22 @@ import {
   Icon,
   View,
 } from 'native-base';
-import {getResetAndNavigateActionTo} from '../../navigators';
+import {actions} from '../actions/actions';
+import {connect} from 'react-redux';
 
 class OnboardingScreen extends React.Component {
   static navigationOptions = {
     title: 'Vamos Começar',
   };
 
-  resetAndNavigate(routeName) {
-    const action = getResetAndNavigateActionTo(routeName);
-    this.props.navigation.dispatch(action);
-  }
+  // resetAndNavigate(routeName) {
+  //   const action = getResetAndNavigateActionTo(routeName);
+  //   this.props.navigation.dispatch(action);
+  // }
 
   render() {
+    const {dispatch} = this.props;
+
     return (
         <Container>
           <View style={{flex: 1, padding: 10}}>
@@ -42,7 +45,7 @@ class OnboardingScreen extends React.Component {
               </Button>
               <Button
                   transparent
-                  onPress={() => this.resetAndNavigate('LoggedOutStack')}
+                  onPress={() => dispatch(actions.logOut())}
                   style={{paddingTop: 10}}
               >
                 <Text>Sign Out</Text>
@@ -53,5 +56,10 @@ class OnboardingScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  loading: state.global.loading,
+});
+OnboardingScreen = connect(mapStateToProps)(OnboardingScreen);
 
 export {OnboardingScreen};
