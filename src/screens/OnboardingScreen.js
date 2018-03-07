@@ -10,27 +10,25 @@ import {
   Icon,
   View,
 } from 'native-base';
-import {actions} from '../actions/actions';
+import actions from '../reducers/actions';
 import {connect} from 'react-redux';
+import firebase from 'react-native-firebase';
 
 class OnboardingScreen extends React.Component {
+
   static navigationOptions = {
     title: 'Vamos Começar',
   };
 
-  // resetAndNavigate(routeName) {
-  //   const action = getResetAndNavigateActionTo(routeName);
-  //   this.props.navigation.dispatch(action);
-  // }
-
   render() {
     const {dispatch} = this.props;
+    const {currentUser} = firebase.auth();
 
     return (
         <Container>
           <View style={{flex: 1, padding: 10}}>
             <View style={{flex: 4, justifyContent: 'center'}}>
-              <H1 style={{fontSize: 64, lineHeight: 64}}>Olá!</H1>
+              <H1 style={{fontSize: 64, lineHeight: 64}}>Olá {currentUser.email}!</H1>
               <H2 style={{fontSize: 42, lineHeight: 42}}>Parece que você ainda
                 não criou um ponto de vendas.</H2>
             </View>
@@ -45,7 +43,7 @@ class OnboardingScreen extends React.Component {
               </Button>
               <Button
                   transparent
-                  onPress={() => dispatch(actions.logOut())}
+                  onPress={() => dispatch(actions.auth.logOut())}
                   style={{paddingTop: 10}}
               >
                 <Text>Sign Out</Text>
@@ -58,7 +56,8 @@ class OnboardingScreen extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.global.loading,
+  loading: state.ui.loading,
+  // user: state.auth.user,
 });
 OnboardingScreen = connect(mapStateToProps)(OnboardingScreen);
 

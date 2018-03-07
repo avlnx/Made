@@ -1,16 +1,11 @@
 import React from 'react';
 import {Container, Content, H1, H2, Button, Text, View} from 'native-base';
-import {getResetAndNavigateActionTo} from '../navigators/index';
+import actions from '../reducers/actions';
 
 class DashboardScreen extends React.Component {
   static navigationOptions = {
     title: 'Dashboard',
   };
-
-  resetAndNavigate(routeName) {
-    const action = getResetAndNavigateActionTo(routeName);
-    this.props.navigation.dispatch(action);
-  }
 
   render() {
     return (
@@ -19,7 +14,7 @@ class DashboardScreen extends React.Component {
             <H2>Seus pontos de venda</H2>
             <Button
                 transparent
-                onPress={() => this.resetAndNavigate('LoggedOutStack')}
+                onPress={() => actions.auth.logOut()}
             >
               <Text>Sign Out</Text>
             </Button>

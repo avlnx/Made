@@ -21,11 +21,6 @@ class NewPOSScreen extends React.Component {
     title: 'Adicionar novo POS',
   };
 
-  resetAndNavigate(routeName) {
-    const action = getResetAndNavigateActionTo(routeName);
-    this.props.navigation.dispatch(action);
-  }
-
   render() {
     return (
         <Container>

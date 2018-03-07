@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import LoginForm from '../components/LoginForm';
 import {connect} from 'react-redux';
 import firebase from 'react-native-firebase';
-import {actions} from '../actions/actions';
+import actions from '../reducers/actions';
 import {Container} from 'native-base';
 
 const mapStateToProps = (state) => ({
-  loading: state.global.loading,
+  loading: state.ui.loading,
 });
 
 class LoginScreen extends Component {
@@ -25,33 +25,31 @@ class LoginScreen extends Component {
   loginUser() {
     const {email, password} = this.state;
     const {dispatch} = this.props;
-    dispatch(actions.startLoading());
-    dispatch(actions.triedToLogin());
+    dispatch(actions.ui.startLoading());
+    dispatch(actions.auth.triedToLogin());
     firebase.auth().
         signInAndRetrieveDataWithEmailAndPassword(email, password).
         catch((e) => {
           alert(e);
-          dispatch(actions.stopLoading());
+          dispatch(actions.ui.stopLoading());
         }).
         then((user) => {
-          dispatch(actions.stopLoading());
-          if (user) dispatch(actions.logIn());
+          dispatch(actions.ui.stopLoading());
         });
   }
 
   createUser() {
     const {email, password} = this.state;
     const {dispatch} = this.props;
-    dispatch(actions.startLoading());
+    dispatch(actions.ui.startLoading());
     firebase.auth().
         createUserAndRetrieveDataWithEmailAndPassword(email, password).
         catch((e) => {
           alert(e);
-          dispatch(actions.stopLoading());
+          dispatch(actions.ui.stopLoading());
         }).
         then((user) => {
-          dispatch(actions.stopLoading());
-          if (user) dispatch(actions.logIn());
+          dispatch(actions.ui.stopLoading());
         });
   }
 

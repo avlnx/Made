@@ -1,7 +1,7 @@
 import auth from './auth';
-import global from './global';
+import ui from './ui';
 
 export {
   auth,
-  global
+  ui
 };

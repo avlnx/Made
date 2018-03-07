@@ -1,10 +1,10 @@
-import * as types from '../actions/actionTypes';
+import * as types from './actions/actionTypes';
 
 const initialState = {
   loading: false
 };
 
-export default function global(state = initialState, action = {}) {
+export default function ui(state = initialState, action = {}) {
   switch (action.type) {
     case types.START_LOADING:
       return {

@@ -67,8 +67,7 @@ class AddProductsToPOSScreen extends React.Component {
               <Button
                   block
                   iconRight
-                  onPress={() => this.resetAndNavigate(
-                      'LoggedInStack')}
+                  onPress={() => this.resetAndNavigate('Onboarding') }
                   style={{marginTop: 10}}
               >
                 <Text>Salvar Novo Produto</Text>

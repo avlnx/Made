@@ -3,7 +3,7 @@ import firebase from 'react-native-firebase';
 
 import {Spinner} from './common';
 import {LoggedInStack, LoggedOutStack} from '../navigators';
-import {actions} from '../actions/actions';
+import actions from '../reducers/actions';
 import {connect} from 'react-redux';
 import {LoginScreen} from '../screens';
 
@@ -12,14 +12,14 @@ class RootStack extends Component {
     const {dispatch} = this.props;
 
     // Start loading and get login state
-    dispatch(actions.startLoading());
+    dispatch(actions.ui.startLoading());
 
     this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
-      // TODO: Here be dragons
-      dispatch(actions.stopLoading());  // finish loading
-      let authAction = actions.logOut();
-      if (user) authAction = actions.logIn();
-      dispatch(authAction);
+      dispatch(actions.ui.stopLoading());  // finish loading
+      // dispatch(actions.auth.updateUser(user));
+      // let authAction = actions.auth.logOut();
+      // if (user) authAction = actions.auth.logIn();
+      // dispatch(authAction);
     });
   }
 
@@ -28,22 +28,22 @@ class RootStack extends Component {
   }
 
   render() {
-    const {loading, isLoggedIn, triedToLogin} = this.props;
+    const {loading, triedToLogin} = this.props;
+    const {currentUser} = firebase.auth();
 
     // The application is initialising
     if (loading) return <Spinner/>;
 
-    if (isLoggedIn) return <LoggedInStack />;
+    if (currentUser) return <LoggedInStack />;
 
-    if (!isLoggedIn && triedToLogin) return <LoginScreen/>;  // no need for welcome screen
+    if (!currentUser && triedToLogin) return <LoginScreen/>;  // no need for welcome screen
 
     return <LoggedOutStack/>;
   }
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.global.loading,
-  isLoggedIn: state.auth.isLoggedIn,
+  loading: state.ui.loading,
   triedToLogin: state.auth.triedToLogin,
 });
 
