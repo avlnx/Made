@@ -1,63 +1,93 @@
 import React from 'react';
-import {
-  Container,
-  Content,
-  H1,
-  H2,
-  Button,
-  Text,
-  Footer,
-  Icon,
-  View,
-  Form,
-  Item,
-  Input,
-  Label,
-} from 'native-base';
+import {Container} from 'native-base';
 import {getResetAndNavigateActionTo} from '../navigators/index';
+import firebase from 'react-native-firebase';
+import {NewPOSForm} from '../components/NewPosForm';
+import actions from '../reducers/actions';
+import {connect} from 'react-redux';
 
 class NewPOSScreen extends React.Component {
   static navigationOptions = {
     title: 'Adicionar novo POS',
   };
 
+  constructor() {
+    super();
+    this.state = {
+      posSet: false,
+      title: null,
+      nickname: null,
+    };
+    // get a db reference
+    this.db = firebase.firestore();
+  }
+
+  updateTitleInput(title) {
+    this.setState({title});
+  }
+
+  updateNicknameInput(nickname) {
+    this.setState({nickname});
+  }
+
+  addNewPOS() {
+    // get user id
+    const uid = firebase.auth().currentUser.uid;
+
+    // Add new POS to firebase firestore
+    const {title, nickname} = this.state;
+    const posData = {title, nickname};
+
+    // start loading
+    const {dispatch} = this.props;
+    dispatch(actions.ui.startLoading());
+
+    const docRef = this.db.collection('users').
+        doc(uid).
+        collection('pos').
+        add(posData).
+        then(function(docRef) {
+          console.log('New POS successfully written with id: ' + docRef.id);
+          return docRef;
+        }).
+        catch(function(error) {
+          console.error('Error adding POS: ', error);
+          // dispatch(actions.ui.stopLoading());
+          alert(error);
+          return false;
+        });
+
+    dispatch(actions.ui.stopLoading());
+    if (docRef) {
+      // Set state so we know to alter this pos instead of creating a new
+      // one should the user press the back button. Probably will need to sit
+      // TODO: test if needs to be in redux store
+      this.setState({posSet: true});
+      // now navigate to add products to this POS that was just added
+      this.props.navigation.navigate('AddProductsToPOS');
+    }
+  }
+
+  componentWillUnmount() {
+    this.setState({posSet: false});
+  }
+
   render() {
     return (
         <Container>
-          <View style={{flex: 1, padding: 10}}>
-            <View style={{flex: 1, justifyContent: 'center'}}>
-              <H2 style={{fontSize: 42, lineHeight: 42}}>Preencha os dados para
-                adicionar um novo POS à sua conta</H2>
-            </View>
-            <View style={{flex: 4, justifyContent: 'center'}}>
-              <Form>
-                <Item floatingLabel>
-                  <Label>Nome do Ponto</Label>
-                  <Input/>
-                </Item>
-                <Text style={{marginLeft: 15}}>O título do seu ponto de vendas. Seus clientes verão este nome.</Text>
-                <Item floatingLabel last>
-                  <Label>Apelido Interno</Label>
-                  <Input/>
-                </Item>
-                <Text style={{marginLeft: 15}}>Para você saber diferenciar este ponto dos outros. Seus
-                  clientes não verão este valor.</Text>
-              </Form>
-              <Button
-                  block
-                  iconRight
-                  onPress={() => this.props.navigation.navigate(
-                      'AddProductsToPOS')}
-                  style={{marginTop: 10}}
-              >
-                <Text>Adicionar Novo Ponto</Text>
-                <Icon name='add'/>
-              </Button>
-            </View>
-          </View>
+          <NewPOSForm currentTitle={this.state.title}
+                      currentNickname={this.state.nickname}
+                      updateTitleInput={this.updateTitleInput.bind(this)}
+                      updateNicknameInput={this.updateNicknameInput.bind(this)}
+                      addPOSAction={this.addNewPOS.bind(this)}/>
         </Container>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  loading: state.ui.loading,
+});
+
+NewPOSScreen = connect(mapStateToProps)(NewPOSScreen);
 export {NewPOSScreen};

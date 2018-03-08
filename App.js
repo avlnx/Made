@@ -3,7 +3,7 @@ import {createStore, applyMiddleware, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import {createLogger} from 'redux-logger';
-import RootStack from './src/components/RootStack';
+import RootStack from './src/screens/RootStack';
 
 import * as reducers from './src/reducers';
 

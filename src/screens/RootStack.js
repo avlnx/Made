@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import firebase from 'react-native-firebase';
 
-import {Spinner} from './common';
-import {LoggedInStack, LoggedOutStack} from '../navigators';
-import actions from '../reducers/actions';
+import {Spinner} from '../components/common/index';
+import {LoggedInStack, LoggedOutStack} from '../navigators/index';
+import actions from '../reducers/actions/index';
 import {connect} from 'react-redux';
-import {LoginScreen} from '../screens';
+import {LoginScreen} from './index';
 
 class RootStack extends Component {
   componentWillMount() {

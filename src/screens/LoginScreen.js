@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import LoginForm from '../components/LoginForm';
+import {LoginForm} from '../components/LoginForm';
 import {connect} from 'react-redux';
 import firebase from 'react-native-firebase';
 import actions from '../reducers/actions';
