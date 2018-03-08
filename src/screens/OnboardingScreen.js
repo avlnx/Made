@@ -4,52 +4,46 @@ import {
   Content,
   H1,
   H2,
+  H3,
   Button,
   Text,
   Footer,
+  FooterTab,
   Icon,
   View,
 } from 'native-base';
 import actions from '../reducers/actions';
 import {connect} from 'react-redux';
 import firebase from 'react-native-firebase';
+import {UserHeaderTitle, FooterLogout} from '../components/common';
 
 class OnboardingScreen extends React.Component {
 
   static navigationOptions = {
-    title: 'Vamos Começar',
+    headerTitle: <UserHeaderTitle
+        title={'Vamos configurar seu primeiro ponto de vendas'}/>,
   };
 
   render() {
-    const {dispatch} = this.props;
-    const {currentUser} = firebase.auth();
-
     return (
         <Container>
-          <View style={{flex: 1, padding: 10}}>
-            <View style={{flex: 4, justifyContent: 'center'}}>
-              <H1 style={{fontSize: 64, lineHeight: 64}}>Olá {currentUser.email}!</H1>
-              <H2 style={{fontSize: 42, lineHeight: 42}}>Parece que você ainda
-                não criou um ponto de vendas.</H2>
-            </View>
-            <View style={{flex: 1, justifyContent: 'center'}}>
-              <Button
-                  onPress={() => this.props.navigation.navigate('NewPOS')}
-                  iconRight
-                  block
-              >
-                <Text>Cadastrar meu primeiro ponto de vendas</Text>
-                <Icon name='add'/>
-              </Button>
-              <Button
-                  transparent
-                  onPress={() => dispatch(actions.auth.logOut())}
-                  style={{paddingTop: 10}}
-              >
-                <Text>Sign Out</Text>
-              </Button>
-            </View>
+          <View style={{
+            flex: 1,
+            padding: 10,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <H1>Escolha um apelido para o seu ponto de vendas</H1>
+            <Button
+                onPress={() => this.props.navigation.navigate('NewPOS')}
+                iconRight
+                block
+            >
+              <Text>Cadastrar meu primeiro ponto de vendas</Text>
+              <Icon name='add'/>
+            </Button>
           </View>
+          <FooterLogout/>
         </Container>
     );
   }
