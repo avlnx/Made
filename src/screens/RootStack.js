@@ -5,7 +5,6 @@ import {Spinner} from '../components/common/index';
 import {LoggedInStack, LoggedOutStack} from '../navigators/index';
 import actions from '../reducers/actions/index';
 import {connect} from 'react-redux';
-import {LoginScreen} from './index';
 
 class RootStack extends Component {
   componentWillMount() {
@@ -28,7 +27,7 @@ class RootStack extends Component {
   }
 
   render() {
-    const {loading, triedToLogin} = this.props;
+    const {loading} = this.props;
     const {currentUser} = firebase.auth();
 
     // The application is initialising
@@ -36,15 +35,12 @@ class RootStack extends Component {
 
     if (currentUser) return <LoggedInStack />;
 
-    if (!currentUser && triedToLogin) return <LoginScreen/>;  // no need for welcome screen
-
     return <LoggedOutStack/>;
   }
 }
 
 const mapStateToProps = (state) => ({
   loading: state.ui.loading,
-  triedToLogin: state.auth.triedToLogin,
 });
 
 export default connect(mapStateToProps)(RootStack);

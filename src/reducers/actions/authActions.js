@@ -1,4 +1,3 @@
-import * as types from './actionTypes';
 import firebase from 'react-native-firebase';
 import actions from './';
 
@@ -13,9 +12,6 @@ const auth = {
         dispatch(actions.ui.stopLoading());
       });
     }
-  },
-  triedToLogin: () => {
-    return {type: types.TRIED_TO_LOG_IN}
   },
 };
 
