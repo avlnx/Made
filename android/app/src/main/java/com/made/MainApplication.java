@@ -1,4 +1,4 @@
-package com.hermes;
+package com.made;
 
 import android.app.Application;
 

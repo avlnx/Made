@@ -20,7 +20,7 @@ class WelcomeScreen extends React.Component {
         <Container>
           <View style={{flex: 1, padding: 10}}>
             <View style={{flex: 4, justifyContent: 'center'}}>
-              <Text style={{textAlign: 'center', fontSize: 92}}>HERMES</Text>
+              <Text style={{textAlign: 'center', fontSize: 102}}>MADE</Text>
               <Text style={{textAlign: 'center', fontSize: 36}}>A primeira
                 solução completa de self-checkout orgulhosamente
                 brasileira.</Text>

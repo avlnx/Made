@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "780287836357",
-    "firebase_url": "https://hermes-sc.firebaseio.com",
-    "project_id": "hermes-sc",
-    "storage_bucket": "hermes-sc.appspot.com"
+    "project_number": "901061446771",
+    "firebase_url": "https://made-sc.firebaseio.com",
+    "project_id": "made-sc",
+    "storage_bucket": "made-sc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:780287836357:android:ce4550b969294034",
+        "mobilesdk_app_id": "1:901061446771:android:671bee4e82a250a9",
         "android_client_info": {
-          "package_name": "com.hermes"
+          "package_name": "com.made"
         }
       },
       "oauth_client": [
         {
-          "client_id": "780287836357-gsmurratsjqopv7mkm5tphdb82f2sjji.apps.googleusercontent.com",
+          "client_id": "901061446771-mte6jkfe18509ag2a3mr79k72qn0fuhq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBOvicPz8IZggnX5slivS15sBcxik79IZw"
+          "current_key": "AIzaSyAb-KBOSUKvxpYdDMl-IIlVBZObwUxrnOI"
         }
       ],
       "services": {
