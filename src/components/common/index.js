@@ -1,4 +1,6 @@
 export * from './Spinner';
 export * from './Hero';
-export * from './UserHeaderTitle';
+export * from './MadeHeader';
 export * from './FooterLogout';
+export * from './SmallText';
+export * from './FullContent';

@@ -1,7 +1,7 @@
 import {StackNavigator} from 'react-navigation';
 import {
   OnboardingScreen,
-  DashboardScreen, NewPOSScreen, AddProductsToPOSScreen,
+  DashboardScreen, AddProductsToPOSScreen,
 } from '../screens';
 
 const LoggedInStack = StackNavigator(
@@ -12,15 +12,12 @@ const LoggedInStack = StackNavigator(
       Dashboard: {
         screen: DashboardScreen,
       },
-      NewPOS: {
-        screen: NewPOSScreen,
-      },
       AddProductsToPOS: {
         screen: AddProductsToPOSScreen,
       },
     },
     {
-      // headerMode: 'none',
+      headerMode: 'none',
     },
 );
 

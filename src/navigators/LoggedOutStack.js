@@ -8,8 +8,8 @@ const LoggedOutStack = StackNavigator(
       },
     },
     {
-      initialScreen: 'Welcome'
-      // headerMode: 'none',
+      initialScreen: 'Welcome',
+      headerMode: 'none',
     },
 );
 
