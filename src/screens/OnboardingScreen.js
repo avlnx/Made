@@ -17,15 +17,11 @@ import {
 import actions from '../reducers/actions';
 import {connect} from 'react-redux';
 import firebase from 'react-native-firebase';
-import {FullContent} from '../components/common';
-import {LoadPOSForm} from '../components';
+import {FullContent, SmallText} from '../components/common';
+import {LoadPosForm} from '../components';
 import {getResetAndNavigateActionTo} from '../navigators';
 
 class OnboardingScreen extends React.Component {
-
-  static navigationOptions = {
-    header: null,
-  };
 
   constructor() {
     super();
@@ -81,12 +77,14 @@ class OnboardingScreen extends React.Component {
         <Container>
           <FullContent style={{justifyContent: 'center', alignItems: 'center'}}>
             <H1>Escolha um apelido para o seu ponto de vendas</H1>
-            <View>
-              <LoadPOSForm
+            <View style={{marginBottom: 40}}>
+              <LoadPosForm
                   currentNickname={this.state.nickname}
                   updateNicknameInput={this.updateNicknameInput.bind(this)}
                   addPOSAction={this.addNewPOS.bind(this)}/>
             </View>
+            <H2>Agora escolha um template para seu novo pos</H2>
+            <SmallText>Os produtos, preços e quantidades inicias serão copiados do template escolhido.</SmallText>
           </FullContent>
         </Container>
     );

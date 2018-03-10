@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Form, Item, Label, Input, Text, Button, Icon} from 'native-base';
 
-const LoadPOSForm = (props) => {
+const LoadPosForm = (props) => {
   const {
     currentNickname,
     updateNicknameInput,
@@ -33,4 +33,4 @@ const LoadPOSForm = (props) => {
   );
 };
 
-export {LoadPOSForm};
+export {LoadPosForm};
