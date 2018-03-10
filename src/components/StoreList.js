@@ -18,19 +18,25 @@ const StoreList = (props) => {
   const {items} = props;
   return (
       <View>
+        <H1 style={{padding: 20, paddingBottom: 0}}>SUAS LOJAS</H1>
         <List dataArray={items}
               renderRow={(item) =>
                   <ListItem>
-                    <Body>
-                    <Text note>{item.id}</Text>
-                    <H2>{item.nickname}</H2>
-                    </Body>
-                    <Right>
-                      {item.isActive ?
-                          <Text note>A loja já está ativa em outro
-                            aparelho.</Text> :
-                          <Button><Text>Começar a vender</Text></Button>}
-                    </Right>
+                    <Card>
+                      <CardItem>
+                        <Body>
+                          <H2>{item.nickname}</H2>
+                        </Body>
+                      </CardItem>
+                      <CardItem>
+                        <Body>
+                        {item.isActive ?
+                            <Text note>A loja já está ativa em outro
+                              aparelho.</Text> :
+                            <Button><Text>Começar a vender</Text></Button>}
+                        </Body>
+                      </CardItem>
+                    </Card>
                   </ListItem>
               }>
         </List>
