@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Content, H1, H2, Button, Text, View} from 'native-base';
 import actions from '../reducers/actions';
-import {FullContent, MadeHeader} from '../components/common';
+import {MadeHeader} from '../components/common';
 import {StoreList} from '../components';
 import firebase from 'react-native-firebase';
 import {connect} from 'react-redux';
@@ -12,7 +12,6 @@ class DashboardScreen extends React.Component {
     super();
     // get a db reference
     this.db = firebase.firestore();
-    this.stores = [];
   }
 
   componentWillMount() {
@@ -36,7 +35,6 @@ class DashboardScreen extends React.Component {
   }
 
   render() {
-    console.log('About to render stores: ', this.stores.join(', '));
     const {stores} = this.props;
     return (
         <Container>

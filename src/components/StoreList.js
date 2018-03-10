@@ -1,20 +1,41 @@
 import React from 'react';
-import {Text, Card, CardItem, Body, List, ListItem} from 'native-base';
+import {
+  Text,
+  List,
+  ListItem,
+  Card,
+  CardItem,
+  Left,
+  Body,
+  Right,
+  Button,
+  H1,
+  H2,
+  View,
+} from 'native-base';
 
 const StoreList = (props) => {
-  const {
-    items,
-  } = props;
-  console.log('Items in StoreList: ', items.join(', '));
+  const {items} = props;
   return (
-      <List dataArray={items}
-            renderRow={(item) =>
-                <ListItem>
-                  <Text>{item.nickname}</Text>
-                </ListItem>
-            }>
-      </List>
-  )
+      <View>
+        <List dataArray={items}
+              renderRow={(item) =>
+                  <ListItem>
+                    <Body>
+                    <Text note>{item.id}</Text>
+                    <H2>{item.nickname}</H2>
+                    </Body>
+                    <Right>
+                      {item.isActive ?
+                          <Text note>A loja já está ativa em outro
+                            aparelho.</Text> :
+                          <Button><Text>Começar a vender</Text></Button>}
+                    </Right>
+                  </ListItem>
+              }>
+        </List>
+      </View>
+  );
 };
 
 /*
