@@ -76,7 +76,7 @@ class OnboardingScreen extends React.Component {
     return (
         <Container>
           <FullContent style={{justifyContent: 'center', alignItems: 'center'}}>
-            <H1>Escolha um apelido para o seu ponto de vendas</H1>
+            <H1>Escolha um apelido para o seu novo ponto de vendas</H1>
             <View style={{marginBottom: 40}}>
               <LoadPosForm
                   currentNickname={this.state.nickname}

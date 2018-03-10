@@ -1,20 +1,21 @@
 import {StackNavigator} from 'react-navigation';
-import {
-  OnboardingScreen,
-  DashboardScreen, AddProductsToPOSScreen,
-} from '../screens';
+// import {
+//   OnboardingScreen,
+//   DashboardScreen, AddProductsToPOSScreen,
+// } from '../screens';
+import {DashboardScreen} from '../screens';
 
 const LoggedInStack = StackNavigator(
     {
-      Onboarding: {
-        screen: OnboardingScreen,
-      },
+      // Onboarding: {
+      //   screen: OnboardingScreen,
+      // },
       Dashboard: {
         screen: DashboardScreen,
       },
-      AddProductsToPOS: {
-        screen: AddProductsToPOSScreen,
-      },
+      // AddProductsToPOS: {
+      //   screen: AddProductsToPOSScreen,
+      // },
     },
     {
       headerMode: 'none',
