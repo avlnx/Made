@@ -33,10 +33,6 @@ class StoreFrontScreen extends React.Component {
     this.db = firebase.firestore();
   }
 
-  updateProducts() {
-    
-  }
-
   componentWillMount() {
     const uid = firebase.auth().currentUser.uid;
     const {dispatch, activeStore} = this.props;
@@ -51,6 +47,7 @@ class StoreFrontScreen extends React.Component {
           dispatch(actions.stores.setActiveStore(data));  // only update redux
           // TODO: update products - inventory, maybe add inventory to redux?
           // or maybe update products here too, add a thunk to update products
+
         });
 
     // Get and listen to changes to the catalog
