@@ -15,7 +15,7 @@ import {
 } from 'native-base';
 
 const StoreList = (props) => {
-  const {items} = props;
+  const {items, actionActivate} = props;
   return (
       <View>
         <H1 style={{padding: 20, paddingBottom: 0}}>SUAS LOJAS</H1>
@@ -33,7 +33,7 @@ const StoreList = (props) => {
                         {item.isActive ?
                             <Text note>A loja já está ativa em outro
                               aparelho.</Text> :
-                            <Button><Text>Começar a vender</Text></Button>}
+                            <Button onPress={() => actionActivate(item)}><Text>Começar a vender</Text></Button>}
                         </Body>
                       </CardItem>
                     </Card>

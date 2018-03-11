@@ -5,6 +5,7 @@ import {Spinner} from '../components/common/index';
 import {LoggedInStack, LoggedOutStack} from '../navigators/index';
 import actions from '../reducers/actions/index';
 import {connect} from 'react-redux';
+import {StoreFrontScreen} from './';
 
 class RootStack extends Component {
   componentWillMount() {
@@ -27,13 +28,15 @@ class RootStack extends Component {
   }
 
   render() {
-    const {loading} = this.props;
+    const {loading, activeStore} = this.props;
     const {currentUser} = firebase.auth();
 
     // The application is initialising
     if (loading) return <Spinner/>;
 
-    if (currentUser) return <LoggedInStack />;
+    if (currentUser && !activeStore) return <LoggedInStack />;
+
+    if (currentUser && activeStore) return <StoreFrontScreen />;
 
     return <LoggedOutStack/>;
   }
@@ -41,6 +44,7 @@ class RootStack extends Component {
 
 const mapStateToProps = (state) => ({
   loading: state.ui.loading,
+  activeStore: state.stores.activeStore,
 });
 
 export default connect(mapStateToProps)(RootStack);

@@ -22,7 +22,9 @@ class DashboardScreen extends React.Component {
     .onSnapshot(function(querySnapshot) {
       let stores = [];
       querySnapshot.forEach(function(doc) {
-        stores.push(doc.data());
+        let data = doc.data();
+        data.id = doc.id;
+        stores.push(data);
       });
       // update stores in redux
       dispatch(actions.stores.updateStores(stores));
@@ -34,13 +36,30 @@ class DashboardScreen extends React.Component {
     this.unsubscribeStores();
   }
 
+  activateStore(store) {
+    console.log(store);
+    const {uid} = firebase.auth().currentUser;
+    const {dispatch} = this.props;
+    const that = this;
+    dispatch(actions.ui.startLoading());
+    // TODO: make a thunk
+    // Set store as active in firebase
+    this.db.collection('users').doc(uid).collection('stores').doc(store.id).update(
+        {isActive: true}
+    ).then(function(){
+      // Update redux and set this store as active
+      dispatch(actions.stores.activateStore(store.id));
+      dispatch(actions.ui.stopLoading());
+    });
+  }
+
   render() {
     const {stores} = this.props;
     return (
         <Container>
           <MadeHeader title={'Dashboard'}/>
           <Content>
-            <StoreList items={stores} />
+            <StoreList items={stores} actionActivate={this.activateStore.bind(this)}/>
           </Content>
         </Container>
     );
