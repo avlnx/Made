@@ -16,7 +16,7 @@ const stores = {
           collection('users').
           doc(firebase.auth().currentUser.uid).
           collection('stores').
-          doc(payload).
+          doc(payload.id).
           update(
               // TODO: change this to true when we setup persistence. Right now we are
               // allowing stores to be opened in more than one device (hence the isActive
@@ -37,7 +37,10 @@ const stores = {
     // This action actually updates redux. It is only called from the firebase
     // action activateStore. I don't see why you would call this action directly
     return {type: types.SET_ACTIVE_STORE, payload: payload};
-  }
+  },
+  updateProducts: (payload) => {
+    return {type: types.UPDATE_PRODUCTS, payload: payload};
+  },
 
 };
 

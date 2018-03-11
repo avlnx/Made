@@ -38,7 +38,7 @@ class DashboardScreen extends React.Component {
 
   activateStore(store) {
     const {dispatch} = this.props;
-    dispatch(actions.stores.activateStore(store.id));
+    dispatch(actions.stores.activateStore(store));
   }
 
   render() {
