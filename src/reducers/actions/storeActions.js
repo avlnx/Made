@@ -41,6 +41,27 @@ const stores = {
   updateProducts: (payload) => {
     return {type: types.UPDATE_PRODUCTS, payload: payload};
   },
+  updateProductsInStock: () => {
+    return function(dispatch, getState) {
+      // if (!getState().sandwiches.isShopOpen) {
+      //
+      // }
+      let productListInStock = [];
+      let productList = getState().stores.productList;
+      let inventory = getState().stores.activeStore.inventory;
+      productList.forEach(function(product) {
+        if (inventory[product.id] && inventory[product.id] > 0) {
+          // product exists in inventory and has a proper quantity
+          product['quantity'] = inventory[product.id];
+          productListInStock.push(product);
+        }
+      });
+      dispatch(actions.stores.setProductsInStock(productListInStock));
+    }
+  },
+  setProductsInStock: (payload) => {
+    return {type: types.SET_PRODUCTS_IN_STOCK, payload: payload};
+  }
 
 };
 

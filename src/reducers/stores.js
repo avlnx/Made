@@ -15,8 +15,9 @@ activeStore = {
 
 const initialState = {
   storeList: [],
-  activeStore: activeStore,//'lPTYFNdFKQrNwOWfwuDU',  // TODO: set to null and persist state
-  productList: []
+  activeStore: null,//activeStore,//'lPTYFNdFKQrNwOWfwuDU',  // TODO: set to null and persist state
+  productList: [],
+  productListInStock: [],
 };
 
 export default function stores(state = initialState, action = {}) {
@@ -35,6 +36,16 @@ export default function stores(state = initialState, action = {}) {
       return {
         ...state,
         productList: action.payload,
+      };
+    case types.UPDATE_PRODUCTS_IN_STOCK:
+      return {
+        ...state,
+        productList: action.payload,
+      };
+    case types.SET_PRODUCTS_IN_STOCK:
+      return {
+        ...state,
+        productListInStock: action.payload,
       };
     default:
       return state;

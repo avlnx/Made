@@ -36,19 +36,6 @@ class StoreFrontScreen extends React.Component {
   componentWillMount() {
     const uid = firebase.auth().currentUser.uid;
     const {dispatch, activeStore} = this.props;
-    // Get and listen to changes to the active store (like inventory)
-    this.unsubscribeStore = this.db.collection('users').
-        doc(uid).
-        collection('stores').
-        doc(activeStore.id).
-        onSnapshot(function(doc) {
-          let data = doc.data();
-          data.id = doc.id;
-          dispatch(actions.stores.setActiveStore(data));  // only update redux
-          // TODO: update products - inventory, maybe add inventory to redux?
-          // or maybe update products here too, add a thunk to update products
-
-        });
 
     // Get and listen to changes to the catalog
     const catalog = 'made';
@@ -58,17 +45,27 @@ class StoreFrontScreen extends React.Component {
         onSnapshot(function(querySnapshot) {
           let products = [];
           querySnapshot.forEach(function(doc) {
-            // only add to redux if product available in this store.
-            // As in, if the property exists and the quantity is not 0
-            let productQuantity = activeStore.inventory[doc.id];
-            if (productQuantity && productQuantity > 0) {
-              let data = doc.data();
-              data.id = doc.id;
-              products.push(data);
-            }
+            // put full catalog in redux
+            let data = doc.data();
+            data.id = doc.id;
+            products.push(data);
           });
           // update products in redux
           dispatch(actions.stores.updateProducts(products));
+          dispatch(actions.stores.updateProductsInStock());
+        });
+
+    // Get and listen to changes to the active store (like inventory)
+    this.unsubscribeStore = this.db.collection('users').
+        doc(uid).
+        collection('stores').
+        doc(activeStore.id).
+        onSnapshot(function(doc) {
+          let data = doc.data();
+          data.id = doc.id;
+          dispatch(actions.stores.setActiveStore(data));  // only update redux
+          // update inventory (productsInStock)
+          dispatch(actions.stores.updateProductsInStock());
         });
   }
 
@@ -79,7 +76,7 @@ class StoreFrontScreen extends React.Component {
   }
 
   render() {
-    const {activeStore, productList} = this.props;
+    const {activeStore, productListInStock} = this.props;
     return (
         <Container>
           <Content>
@@ -88,13 +85,12 @@ class StoreFrontScreen extends React.Component {
               padding: 20,
               color: 'green',
             }}>MADE</H1>
-            <List dataArray={productList}
+            <List dataArray={productListInStock}
                   renderRow={(product) =>
                       <Card>
                         <CardItem cardBody>
                           <Image source={{uri: product.image}}
                                  style={{height: 200, width: null, flex: 1}}/>
-                          {/*<Text>{item.image}</Text>*/}
                         </CardItem>
                         <CardItem>
                           <Body>
@@ -116,6 +112,7 @@ class StoreFrontScreen extends React.Component {
                     flexDirection: 'row',
                     flexWrap: 'wrap',
                     alignItems: 'flex-start',
+                    padding: 20,
                   }}>
             </List>
           </Content>
@@ -126,7 +123,7 @@ class StoreFrontScreen extends React.Component {
 
 const mapStateToProps = (state) => ({
   activeStore: state.stores.activeStore,
-  productList: state.stores.productList,
+  productListInStock: state.stores.productListInStock,
 });
 
 StoreFrontScreen = connect(mapStateToProps)(StoreFrontScreen);
