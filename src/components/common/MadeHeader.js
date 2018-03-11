@@ -8,12 +8,16 @@ import {
   Right,
   Button,
   Icon,
+  Text,
 } from 'native-base';
 import firebase from 'react-native-firebase';
 import {SmallText} from './';
+import {connect} from 'react-redux';
+import actions from '../../reducers/actions';
 
 class MadeHeader extends Component {
   render() {
+    const {dispatch} = this.props;
     return (
         <Header>
           <Left style={{flex: 1}}>
@@ -23,24 +27,17 @@ class MadeHeader extends Component {
             <Title>{this.props.title}</Title>
           </Body>
           <Right style={{flex: 1}}>
-            <Button transparent>
-              <Icon name='menu'/>
-            </Button>
+            {firebase.auth().currentUser ? <Button default small onPress={() => dispatch(actions.auth.logOut())}>
+              <Text>Sair</Text>
+            </Button> : null}
           </Right>
         </Header>
     );
   }
 }
 
-/*
-<View style={{flex: 1, flexDirection: 'row', alignItems: 'center', padding: 10, justifyContent: 'flex-start'}}>
-          <View style={{flex: 2}}>
-            <H3>{this.props.title}</H3>
-          </View>
-          <View style={{flex: 1}}>
-            <Text style={{alignSelf: 'flex-end', color: 'blue'}}>{firebase.auth().currentUser.email}</Text>
-          </View>
-        </View>
- */
+// export {MadeHeader};
+
+MadeHeader = connect(() => ({}))(MadeHeader);
 
 export {MadeHeader};
