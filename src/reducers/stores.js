@@ -12,7 +12,7 @@ export default function stores(state = initialState, action = {}) {
         ...state,
         storeList: action.payload,
       };
-    case types.ACTIVATE_STORE:
+    case types.SET_ACTIVE_STORE:
       return {
         ...state,
         activeStore: action.payload,

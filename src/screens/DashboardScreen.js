@@ -37,20 +37,8 @@ class DashboardScreen extends React.Component {
   }
 
   activateStore(store) {
-    console.log(store);
-    const {uid} = firebase.auth().currentUser;
     const {dispatch} = this.props;
-    const that = this;
-    dispatch(actions.ui.startLoading());
-    // TODO: make a thunk
-    // Set store as active in firebase
-    this.db.collection('users').doc(uid).collection('stores').doc(store.id).update(
-        {isActive: true}
-    ).then(function(){
-      // Update redux and set this store as active
-      dispatch(actions.stores.activateStore(store.id));
-      dispatch(actions.ui.stopLoading());
-    });
+    dispatch(actions.stores.activateStore(store.id));
   }
 
   render() {
