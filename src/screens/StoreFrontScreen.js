@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image} from 'react-native';
+import {Image, FlatList, Dimensions, StyleSheet} from 'react-native';
 import {
   Container,
   Content,
@@ -15,6 +15,8 @@ import {
   Right,
   H2,
   H3,
+  Button,
+  Icon
 } from 'native-base';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import {getResetAndNavigateActionTo} from '../navigators/index';
@@ -78,40 +80,62 @@ class StoreFrontScreen extends React.Component {
 
   render() {
     const {activeStore, productListInStock} = this.props;
+    const numColumns = 2;
+    const itemMargin = 15;
+    const size = (Dimensions.get('window').width - (itemMargin * 4)) / numColumns;
+    const styles = StyleSheet.create({
+      itemContainer: {
+        width: size,
+        height: 400,
+        margin: itemMargin,
+      },
+      item: {
+        flex: 1,
+        // margin: 20,
+      },
+    });
     return (
         <Container>
           <Content>
-            <MadeLogo />
-            <List dataArray={productListInStock}
-                  renderRow={(product) =>
-                      <Card style={{ width: 600}}>
+            <MadeLogo/>
+            <FlatList
+                data={productListInStock}
+                numColumns={numColumns}
+                keyExtractor={item => item.id}
+                renderItem={({item}) =>
+                    <View style={styles.itemContainer}>
+                      <Card style={styles.item}>
                         <CardItem cardBody>
-                          <Image source={{uri: product.image}}
-                                 style={{height: 300, width: null, flex: 1}}/>
+                          <Image source={{uri: item.image}}
+                                 style={{height: 250, width: null, flex: 1}}/>
                         </CardItem>
                         <CardItem>
-                          <Body>
-                          <H3>{product.title}</H3>
+                          <Body style={{flex: 2}}>
+                          <H3>{item.title}</H3>
                           {/*<Text note>{item.description}</Text>*/}
                           </Body>
-                          <Right>
+                          <Right style={{flex: 1}}>
                             <Text style={{
                               fontSize: 24,
                               fontWeight: 'bold',
-                            }}>R$ {product.publicPrice}</Text>
+                            }}>R$ {item.publicPrice}</Text>
                           </Right>
                         </CardItem>
+                        <CardItem style={{justifyContent: 'flex-end'}}>
+                          <Button transparent small>
+                            <Text>Mais informações</Text>
+                          </Button>
+                          <Button style={{marginRight: 10}}>
+                            <Icon name='remove'/>
+                          </Button>
+                          <Button>
+                            <Icon name='add'/>
+                          </Button>
+                        </CardItem>
                       </Card>
-                  }
-                  contentContainerStyle={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    flexDirection: 'row',
-                    flexWrap: 'wrap',
-                    alignItems: 'flex-start',
-                    padding: 20,
-                  }}>
-            </List>
+                    </View>
+                }>
+            </FlatList>
           </Content>
         </Container>
     );
