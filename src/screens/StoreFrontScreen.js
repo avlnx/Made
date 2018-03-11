@@ -21,6 +21,7 @@ import {getResetAndNavigateActionTo} from '../navigators/index';
 import {connect} from 'react-redux';
 import actions from '../reducers/actions';
 import firebase from 'react-native-firebase';
+import {MadeLogo} from '../components/common';
 
 class StoreFrontScreen extends React.Component {
 
@@ -80,17 +81,13 @@ class StoreFrontScreen extends React.Component {
     return (
         <Container>
           <Content>
-            <H1 style={{
-              alignSelf: 'center',
-              padding: 20,
-              color: 'green',
-            }}>MADE</H1>
+            <MadeLogo />
             <List dataArray={productListInStock}
                   renderRow={(product) =>
-                      <Card>
+                      <Card style={{ width: 600}}>
                         <CardItem cardBody>
                           <Image source={{uri: product.image}}
-                                 style={{height: 200, width: null, flex: 1}}/>
+                                 style={{height: 300, width: null, flex: 1}}/>
                         </CardItem>
                         <CardItem>
                           <Body>
