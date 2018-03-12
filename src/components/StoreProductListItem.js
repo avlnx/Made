@@ -49,10 +49,10 @@ const StoreProductListItem = (props) => {
             <Button transparent small>
               <Text>Mais informações</Text>
             </Button>
-            <Button style={{marginRight: 10}}>
+            <Button style={{marginRight: 10}} onPress={() => props.updateAction(item, '-')}>
               <Icon name='remove'/>
             </Button>
-            <Button>
+            <Button onPress={() => props.updateAction(item, '+')}>
               <Icon name='add'/>
             </Button>
           </CardItem>

@@ -13,11 +13,17 @@ activeStore = {
   nickname: 'Easynvest',
 };
 
+// let cart = {
+//   'PnQEwlAbzFGQt9FCzhtv': 1,
+//   'kotEfz2Ziq7FxtbFRQZb': 2,
+// };
+
 const initialState = {
   storeList: [],
   activeStore: activeStore,//'lPTYFNdFKQrNwOWfwuDU',  // TODO: set to null and persist state
   productList: [],
   productListInStock: [],
+  cart: {},
 };
 
 export default function stores(state = initialState, action = {}) {
@@ -46,6 +52,16 @@ export default function stores(state = initialState, action = {}) {
       return {
         ...state,
         productListInStock: action.payload,
+      };
+    case types.UPDATE_PRODUCT_QUANTITY_IN_CART:
+      // Get old quantity for product in payload and increment/decrement
+      let productId = action.payload.productId;
+      let oldQuantity = state.cart[productId] ? state.cart[productId] : 0;
+      let newQuantity = action.payload.operation === '+' ? oldQuantity + 1 : oldQuantity - 1;
+      if (newQuantity < 0) newQuantity = 0;
+      return {
+        ...state,
+        cart: Object.assign({}, state.cart, {[productId]: newQuantity}),
       };
     default:
       return state;

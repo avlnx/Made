@@ -58,8 +58,10 @@ const stores = {
   },
   setProductsInStock: (payload) => {
     return {type: types.SET_PRODUCTS_IN_STOCK, payload: payload};
-  }
-
+  },
+  updateProductQuantityInCart: (payload) => {
+    return {type: types.UPDATE_PRODUCT_QUANTITY_IN_CART, payload: payload}
+  },
 };
 
 export {stores};
