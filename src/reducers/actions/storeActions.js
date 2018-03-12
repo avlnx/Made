@@ -43,9 +43,6 @@ const stores = {
   },
   updateProductsInStock: () => {
     return function(dispatch, getState) {
-      // if (!getState().sandwiches.isShopOpen) {
-      //
-      // }
       let productListInStock = [];
       let productList = getState().stores.productList;
       let inventory = getState().stores.activeStore.inventory;

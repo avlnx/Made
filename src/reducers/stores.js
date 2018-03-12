@@ -15,7 +15,7 @@ activeStore = {
 
 const initialState = {
   storeList: [],
-  activeStore: null,//activeStore,//'lPTYFNdFKQrNwOWfwuDU',  // TODO: set to null and persist state
+  activeStore: activeStore,//'lPTYFNdFKQrNwOWfwuDU',  // TODO: set to null and persist state
   productList: [],
   productListInStock: [],
 };

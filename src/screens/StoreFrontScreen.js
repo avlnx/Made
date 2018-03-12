@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import actions from '../reducers/actions';
 import firebase from 'react-native-firebase';
 import {MadeLogo} from '../components/common';
-import {StoreProductList} from '../components';
+import {StoreProductList, CartWidget} from '../components';
 
 class StoreFrontScreen extends React.Component {
 
@@ -61,10 +61,11 @@ class StoreFrontScreen extends React.Component {
   render() {
     return (
         <Container>
+          <MadeLogo/>
           <Content>
-            <MadeLogo/>
             <StoreProductList/>
           </Content>
+          <CartWidget/>
         </Container>
     );
   }
