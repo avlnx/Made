@@ -23,7 +23,10 @@ const initialState = {
   activeStore: activeStore,//'lPTYFNdFKQrNwOWfwuDU',  // TODO: set to null and persist state
   productList: [],
   productListInStock: [],
-  cart: {},
+  cart: {
+    totalQuantity: 0,
+    totalPrice: 0,
+  },
 };
 
 export default function stores(state = initialState, action = {}) {
@@ -55,13 +58,36 @@ export default function stores(state = initialState, action = {}) {
       };
     case types.UPDATE_PRODUCT_QUANTITY_IN_CART:
       // Get old quantity for product in payload and increment/decrement
-      let productId = action.payload.productId;
-      let oldQuantity = state.cart[productId] ? state.cart[productId] : 0;
-      let newQuantity = action.payload.operation === '+' ? oldQuantity + 1 : oldQuantity - 1;
-      if (newQuantity < 0) newQuantity = 0;
+      // also update totalQuantity and totalPrice. You can assume decrement actions
+      // won't be dispatched when an item has 0 items in cart
+      let productId = action.payload.product.id;
+      let productPrice = parseFloat(action.payload.product.publicPrice);
+      let oldQuantity = state.cart[productId] ? state.cart[productId] : 0;  // either a already set qtt or 0
+      let oldTotalQuantity = state.cart.totalQuantity;
+      let oldTotalPrice = parseFloat(state.cart.totalPrice);
+
+      // if we are incrementing the factor will be one and we will increment
+      // the quantities and add a positive amount to the totalPrice. Otherwise
+      // we will decrement the quantities and add a negative amount to the
+      // totalPrice
+      let factor = 1;
+      if (action.payload.operation !== '+') {
+        factor = -1;
+      }
+
+      let newQuantity = oldQuantity + factor;
+      let newTotalQuantity = oldTotalQuantity + factor;
+      // arithmetic fix for javascript float operations. Curious? See this article:
+      // https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html
+      let newTotalPrice = (oldTotalPrice + (productPrice * factor)).toFixed(2);
+
       return {
         ...state,
-        cart: Object.assign({}, state.cart, {[productId]: newQuantity}),
+        cart: Object.assign({}, state.cart, {
+          [productId]: newQuantity,
+          totalQuantity: newTotalQuantity,
+          totalPrice: newTotalPrice,
+        }),
       };
     default:
       return state;

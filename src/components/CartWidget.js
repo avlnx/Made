@@ -3,7 +3,9 @@ import {Text, View, Icon, Button, H1, Badge} from 'native-base';
 import {connect} from 'react-redux';
 
 class CartWidget extends Component {
+
   render() {
+    const {cart} = this.props;
     return (
         <View style={{
           height: 100,
@@ -17,11 +19,11 @@ class CartWidget extends Component {
           <View style={{flex: 1}}>
             <Icon name={'cart'} style={{fontSize: 42}}/>
             <Badge primary>
-              <Text style={{fontSize: 24, lineHeight: 28}}>2</Text>
+              <Text style={{fontSize: 24, lineHeight: 28}}>{cart.totalQuantity}</Text>
             </Badge>
           </View>
           <View style={{flex: 4}}>
-            <H1 style={{fontWeight: 'bold', fontSize: 36, lineHeight: 36}}>R$ 79,00</H1>
+            <H1 style={{fontWeight: 'bold', fontSize: 36, lineHeight: 36}}>R$ {cart.totalPrice}</H1>
           </View>
           <View style={{flex: 8}}>
             <Button iconRight block primary>
@@ -34,7 +36,9 @@ class CartWidget extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  cart: state.stores.cart,
+});
 
 CartWidget = connect(mapStateToProps)(CartWidget);
 

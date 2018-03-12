@@ -8,7 +8,7 @@ class StoreProductList extends Component {
   updateProductQuantity(item, operation) {
     const {dispatch} = this.props;
     dispatch(actions.stores.updateProductQuantityInCart({
-      productId: item.id,
+      product: item,
       operation
     }));
   }
