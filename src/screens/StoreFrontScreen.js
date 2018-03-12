@@ -91,7 +91,6 @@ class StoreFrontScreen extends React.Component {
       },
       item: {
         flex: 1,
-        // margin: 20,
       },
     });
     return (
