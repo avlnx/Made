@@ -25,7 +25,7 @@ const initialCartState = {
 
 const initialState = {
   storeList: [],
-  activeStore: activeStore,//'lPTYFNdFKQrNwOWfwuDU',  // TODO: set to null and persist state
+  activeStore: null,//'lPTYFNdFKQrNwOWfwuDU',  // TODO: set to null and persist state
   productList: [],
   productListInStock: [],
   cart: initialCartState,

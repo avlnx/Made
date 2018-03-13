@@ -26,6 +26,7 @@ class WelcomeScreen extends React.Component {
     this.state = {
       email: null,
       password: null,
+      lostPasswordMode: false,
     };
   }
 
@@ -52,6 +53,19 @@ class WelcomeScreen extends React.Component {
     this.setState({password});
   }
 
+  sendPasswordRecoveryEmail() {
+    const {dispatch} = this.props;
+    if(!this.state.email) {
+      alert("Você precisa preencher o campo email.");
+    }
+    console.log(this.state.email);
+    dispatch(actions.auth.sendRecoveryPassword(this.state.email));
+  }
+
+  toggleLostPasswordMode() {
+    this.setState({lostPasswordMode: !this.state.lostPasswordMode});
+  }
+
   render() {
     return (
         <Container>
@@ -64,7 +78,10 @@ class WelcomeScreen extends React.Component {
                          currentPassword={this.state.password}
                          loginUserAction={this.loginUser.bind(this)}
                          updateUserEmailInput={this.updateUserEmailInput.bind(this)}
-                         updateUserPasswordInput={this.updateUserPasswordInput.bind(this)}/>
+                         updateUserPasswordInput={this.updateUserPasswordInput.bind(this)}
+              toggleLostPasswordModeAction={this.toggleLostPasswordMode.bind(this)}
+              sendPasswordRecoveryEmailAction={this.sendPasswordRecoveryEmail.bind(this)}
+              lostPasswordMode={this.state.lostPasswordMode}/>
             </View>
           </View>
         </Container>
