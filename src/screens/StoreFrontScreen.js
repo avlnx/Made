@@ -36,6 +36,8 @@ class StoreFrontScreen extends React.Component {
           // update products in redux
           dispatch(actions.stores.updateCatalog(products));
           dispatch(actions.stores.updateProductsInStock());
+          // Reset cart, prices might have changed which would cause inconsistencies
+          dispatch(actions.stores.clearCart());
         });
 
     // Get and listen to changes to the active store (like inventory)

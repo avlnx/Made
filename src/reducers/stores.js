@@ -18,15 +18,17 @@ activeStore = {
 //   'kotEfz2Ziq7FxtbFRQZb': 2,
 // };
 
+const initialCartState = {
+  totalQuantity: 0,
+  totalPrice: 0,
+};
+
 const initialState = {
   storeList: [],
   activeStore: activeStore,//'lPTYFNdFKQrNwOWfwuDU',  // TODO: set to null and persist state
   productList: [],
   productListInStock: [],
-  cart: {
-    totalQuantity: 0,
-    totalPrice: 0,
-  },
+  cart: initialCartState,
 };
 
 export default function stores(state = initialState, action = {}) {
@@ -88,6 +90,11 @@ export default function stores(state = initialState, action = {}) {
           totalQuantity: newTotalQuantity,
           totalPrice: newTotalPrice,
         }),
+      };
+    case types.CLEAR_CART:
+      return {
+        ...state,
+        cart: initialCartState,
       };
     default:
       return state;

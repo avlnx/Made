@@ -26,7 +26,7 @@ class CartWidget extends Component {
             <H1 style={{fontWeight: 'bold', fontSize: 36, lineHeight: 36}}>R$ {cart.totalPrice}</H1>
           </View>
           <View style={{flex: 8}}>
-            <Button iconRight block primary>
+            <Button iconRight block primary disabled={!cart.totalQuantity}>
               <Text>Checkout</Text>
               <Icon name={'arrow-dropright-circle'}/>
             </Button>

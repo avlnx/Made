@@ -64,6 +64,9 @@ const stores = {
   updateProductQuantityInCart: (payload) => {
     return {type: types.UPDATE_PRODUCT_QUANTITY_IN_CART, payload: payload}
   },
+  clearCart: () => {
+    return {type: types.CLEAR_CART}
+  },
 };
 
 export {stores};
