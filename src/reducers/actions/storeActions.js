@@ -38,13 +38,15 @@ const stores = {
     // action activateStore. I don't see why you would call this action directly
     return {type: types.SET_ACTIVE_STORE, payload: payload};
   },
-  updateProducts: (payload) => {
-    return {type: types.UPDATE_PRODUCTS, payload: payload};
+  updateCatalog: (payload) => {
+    // This action updates the catalog, it set the 'catalog' store variable to
+    // be used in the action below (updateProductsInStock)
+    return {type: types.UPDATE_CATALOG, payload: payload};
   },
   updateProductsInStock: () => {
     return function(dispatch, getState) {
       let productListInStock = [];
-      let productList = getState().stores.productList;
+      let productList = getState().stores.catalog;
       let inventory = getState().stores.activeStore.inventory;
       productList.forEach(function(product) {
         if (inventory[product.id] && inventory[product.id] > 0) {

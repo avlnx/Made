@@ -41,10 +41,10 @@ export default function stores(state = initialState, action = {}) {
         ...state,
         activeStore: action.payload,
       };
-    case types.UPDATE_PRODUCTS:
+    case types.UPDATE_CATALOG:
       return {
         ...state,
-        productList: action.payload,
+        catalog: action.payload,
       };
     case types.UPDATE_PRODUCTS_IN_STOCK:
       return {

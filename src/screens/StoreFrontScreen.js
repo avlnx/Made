@@ -34,7 +34,7 @@ class StoreFrontScreen extends React.Component {
             products.push(data);
           });
           // update products in redux
-          dispatch(actions.stores.updateProducts(products));
+          dispatch(actions.stores.updateCatalog(products));
           dispatch(actions.stores.updateProductsInStock());
         });
 
