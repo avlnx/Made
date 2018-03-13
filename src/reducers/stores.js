@@ -26,7 +26,7 @@ const initialCartState = {
 const initialState = {
   storeList: [],
   activeStore: null,//'lPTYFNdFKQrNwOWfwuDU',  // TODO: set to null and persist state
-  productList: [],
+  catalog: [],
   productListInStock: [],
   cart: initialCartState,
 };
@@ -47,11 +47,6 @@ export default function stores(state = initialState, action = {}) {
       return {
         ...state,
         catalog: action.payload,
-      };
-    case types.UPDATE_PRODUCTS_IN_STOCK:
-      return {
-        ...state,
-        productList: action.payload,
       };
     case types.SET_PRODUCTS_IN_STOCK:
       return {
