@@ -12,6 +12,7 @@
     "react-native": "0.53.3",
     "react-native-easy-grid": "^0.1.17",
     "react-native-firebase": "^3.3.1",
+    "react-native-spinkit": "^1.1.1",
     "react-navigation": "^1.5.2",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
