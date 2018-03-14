@@ -10,6 +10,10 @@ class DashboardScreen extends React.Component {
 
   constructor() {
     super();
+    // If a store is active load store stack
+    const {activeStore} = this.props;
+    if (activeStore) this.props.navigation.navigate('Store');
+
     // get a db reference
     this.db = firebase.firestore();
   }
@@ -66,6 +70,7 @@ class DashboardScreen extends React.Component {
 
 const mapStateToProps = (state) => ({
   stores: state.stores.storeList,
+  activeStore: state.stores.activeStore,
 });
 
 DashboardScreen = connect(mapStateToProps)(DashboardScreen);

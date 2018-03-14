@@ -1,7 +1,8 @@
 import * as types from './actions/actionTypes';
 
 const initialState = {
-  loading: false
+  loading: false,
+  loadingMessage: null,
 };
 
 export default function ui(state = initialState, action = {}) {
@@ -9,12 +10,14 @@ export default function ui(state = initialState, action = {}) {
     case types.START_LOADING:
       return {
         ...state,
-        loading: true
+        loading: true,
+        loadingMessage: action.payload
       };
     case types.STOP_LOADING:
       return {
         ...state,
-        loading: false
+        loading: false,
+        loadingMessage: null,
       };
     default:
       return state;
