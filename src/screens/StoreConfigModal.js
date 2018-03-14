@@ -5,12 +5,9 @@ import {Text} from 'native-base';
 class StoreConfigModal extends Component {
   render() {
     const {params} = this.props.navigation.state;
-    // const storeId = params.storeId;
     const storeId = params ? params.storeId : null;
     const {stores} = this.props;
-    console.log('storeId in StoreConfigModal:' + storeId);
-    let store = stores.filter((store) => {return store.id === storeId});
-    console.log('store in StoreConfigModal: ' + store.nickname);
+    let store = (stores.filter((store) => {return store.id === storeId})).shift();
 
     return (
         <Text>StoreConfig for {store.nickname}</Text>

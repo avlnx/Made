@@ -1,5 +1,5 @@
 import {StackNavigator} from 'react-navigation';
-import {DashboardScreen} from '../screens';
+import {DashboardScreen, StoreConfigModal} from '../screens';
 import {ModalStack} from './ModalStack';
 
 const LoggedInStack = StackNavigator(
@@ -7,8 +7,8 @@ const LoggedInStack = StackNavigator(
       Dashboard: {
         screen: DashboardScreen,
       },
-      Modal: {
-        screen: ModalStack,
+      StoreConfig: {
+        screen: StoreConfigModal,
       },
     },
     {
