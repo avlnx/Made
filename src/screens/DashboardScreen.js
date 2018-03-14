@@ -43,8 +43,8 @@ class DashboardScreen extends React.Component {
   }
 
   activateStore(store) {
-    const {dispatch} = this.props;
-    dispatch(actions.stores.activateStore(store));
+    const {dispatch, navigation} = this.props;
+    dispatch(actions.stores.activateStore({store, navigation}));
   }
 
   storeConfigAction(store) {

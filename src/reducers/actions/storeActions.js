@@ -11,12 +11,12 @@ const stores = {
     // When that is done, we call the action tha takes care of updating redux
     // with the new activeStore setActiveStore
     return function(dispatch) {
-      dispatch(actions.ui.startLoading());
+      dispatch(actions.ui.startLoading('Carregando sua loja')); //TODO: remove from redux
       firebase.firestore().
           collection('users').
           doc(firebase.auth().currentUser.uid).
           collection('stores').
-          doc(payload.id).
+          doc(payload.store.id).
           update(
               // TODO: change this to true when we setup persistence. Right now we are
               // allowing stores to be opened in more than one device (hence the isActive
@@ -29,7 +29,8 @@ const stores = {
           then(function() {
             // Update redux and set this store as active
             dispatch(actions.ui.stopLoading());
-            dispatch(actions.stores.setActiveStore(payload));
+            dispatch(actions.stores.setActiveStore(payload.store));
+            payload.navigation.navigate('Store');
           });
     };
   },
