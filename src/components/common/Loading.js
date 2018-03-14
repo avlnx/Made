@@ -16,9 +16,13 @@ class Loading extends Component {
     const {message} = this.props;
     return (
         <View style={styles.container}>
-          <MadeLogo />
-          <Spinner style={styles.spinner} isVisible={true} size={48} type={'CircleFlip'} />
-          <H1 style={styles.text}>{message ? message : 'Carregando...'}</H1>
+          <View style={styles.logoContainer}>
+            <MadeLogo />
+          </View>
+          <View style={styles.spinnerContainer}>
+            <Spinner style={styles.spinner} isVisible={true} size={102} type={'Wave'} />
+            <H1 style={styles.text}>{message ? message : 'Carregando...'}</H1>
+          </View>
         </View>
     );
   }
@@ -27,12 +31,20 @@ class Loading extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    // backgroundColor: '#eaed7a',
     alignItems: 'center',
-    backgroundColor: '#eaed7a',
+    justifyContent: 'center'
+  },
+  logoContainer: {
+    flex: 1
+  },
+  spinnerContainer: {
+    flex: 8,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   spinner: {
-    color: '#333',
+    marginBottom: 20,
   },
   text: {
     color: '#444',

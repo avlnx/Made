@@ -17,7 +17,7 @@ import actions from '../../reducers/actions';
 
 class MadeHeader extends Component {
   render() {
-    const {dispatch} = this.props;
+    const {dispatch, navigation} = this.props;
     return (
         <Header>
           <Left style={{flex: 1}}>
@@ -27,7 +27,7 @@ class MadeHeader extends Component {
             <Title>{this.props.title}</Title>
           </Body>
           <Right style={{flex: 1}}>
-            {firebase.auth().currentUser ? <Button default small onPress={() => dispatch(actions.auth.logOut())}>
+            {firebase.auth().currentUser ? <Button default small onPress={() => dispatch(actions.auth.logOut(navigation))}>
               <Text>Sair</Text>
             </Button> : null}
           </Right>

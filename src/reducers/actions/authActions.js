@@ -2,15 +2,17 @@ import firebase from 'react-native-firebase';
 import actions from './';
 
 const auth = {
-  logOut: () => {
-    // thunks win!
+  logOut: (payload) => {
+    // payload = navigation
     return function(dispatch) {
-      dispatch(actions.ui.startLoading());
+      dispatch(actions.ui.startLoading('Até logo :)'));
+      payload.navigate('Loading');
       return firebase.auth().signOut().catch((e) => {
         alert(e);
+        payload.goBack(null);
       }).then(() => {
-      }).finally(() => {
         dispatch(actions.ui.stopLoading());
+        payload.navigate('Auth');
       });
     };
   },

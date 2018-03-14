@@ -10,7 +10,7 @@ import * as reducers from './src/reducers';
 import {StackNavigator, SwitchNavigator} from 'react-navigation';
 import {
   DashboardScreen, StoreConfigModal, StoreFrontScreen,
-  WelcomeScreen, AuthLoadingScreen
+  WelcomeScreen, AuthLoadingScreen, LoadingScreen
 } from './src/screens';
 
 const reducer = combineReducers(reducers);
@@ -34,6 +34,9 @@ const AppStack = StackNavigator(
       StoreConfig: {
         screen: StoreConfigModal,
       },
+      Loading: {
+        screen: LoadingScreen,
+      }
     },
     {
       initialRouteName: 'Dashboard',

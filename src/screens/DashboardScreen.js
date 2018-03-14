@@ -10,15 +10,15 @@ class DashboardScreen extends React.Component {
 
   constructor() {
     super();
-    // If a store is active load store stack
-    const {activeStore} = this.props;
-    if (activeStore) this.props.navigation.navigate('Store');
-
     // get a db reference
     this.db = firebase.firestore();
   }
 
   componentWillMount() {
+    // If a store is active load store stack
+    const {activeStore} = this.props;
+    if (activeStore) this.props.navigation.navigate('Store');
+
     const uid = firebase.auth().currentUser.uid;
     const {dispatch} = this.props;
     // Get and listen to changes to list of stores for the currently logged in user
@@ -57,7 +57,7 @@ class DashboardScreen extends React.Component {
     const {stores} = this.props;
     return (
         <Container>
-          <MadeHeader title={'Dashboard'}/>
+          <MadeHeader title={'Dashboard'} navigation={this.props.navigation}/>
           <Content>
             <StoreList items={stores}
                        actionActivate={this.activateStore.bind(this)}

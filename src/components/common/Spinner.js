@@ -1,7 +1,7 @@
 /* DEPRECATED - TODO: update to Loading component and state message */
 import React from 'react';
 import {View, ActivityIndicator} from 'react-native';
-import Spinner from 'react-native-spinkit';
+// import Spinner from 'react-native-spinkit';
 
 const Spinner = () => {
   return (
