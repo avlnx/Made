@@ -18,17 +18,19 @@ class DashboardScreen extends React.Component {
     const uid = firebase.auth().currentUser.uid;
     const {dispatch} = this.props;
     // Get and listen to changes to list of stores for the currently logged in user
-    this.unsubscribeStores = this.db.collection('users').doc(uid).collection('stores')
-    .onSnapshot(function(querySnapshot) {
-      let stores = [];
-      querySnapshot.forEach(function(doc) {
-        let data = doc.data();
-        data.id = doc.id;
-        stores.push(data);
-      });
-      // update stores in redux
-      dispatch(actions.stores.updateStores(stores));
-    });
+    this.unsubscribeStores = this.db.collection('users').
+        doc(uid).
+        collection('stores').
+        onSnapshot(function(querySnapshot) {
+          let stores = [];
+          querySnapshot.forEach(function(doc) {
+            let data = doc.data();
+            data.id = doc.id;
+            stores.push(data);
+          });
+          // update stores in redux
+          dispatch(actions.stores.updateStores(stores));
+        });
   }
 
   componentWillUnmount() {
@@ -41,13 +43,21 @@ class DashboardScreen extends React.Component {
     dispatch(actions.stores.activateStore(store));
   }
 
+  storeConfigAction(store) {
+    this.props.navigation.navigate('StoreConfig', {
+      storeId: store.id
+    });
+  }
+
   render() {
     const {stores} = this.props;
     return (
         <Container>
           <MadeHeader title={'Dashboard'}/>
           <Content>
-            <StoreList items={stores} actionActivate={this.activateStore.bind(this)}/>
+            <StoreList items={stores}
+                       actionActivate={this.activateStore.bind(this)}
+                       storeConfigAction={this.storeConfigAction.bind(this)}/>
           </Content>
         </Container>
     );
@@ -55,7 +65,7 @@ class DashboardScreen extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  stores: state.stores.storeList
+  stores: state.stores.storeList,
 });
 
 DashboardScreen = connect(mapStateToProps)(DashboardScreen);

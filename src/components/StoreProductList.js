@@ -9,22 +9,25 @@ class StoreProductList extends Component {
     const {dispatch} = this.props;
     dispatch(actions.stores.updateProductQuantityInCart({
       product: item,
-      operation
+      operation,
     }));
   }
 
   render() {
     const numColumns = 2;
-    return(
+    return (
         <FlatList
             data={this.props.productListInStock}
             numColumns={numColumns}
             keyExtractor={item => item.id}
             renderItem={({item}) =>
-                <StoreProductListItem item={item} numColumns={2} updateAction={this.updateProductQuantity.bind(this)}/>
+                <StoreProductListItem
+                    item={item}
+                    numColumns={2}
+                    updateAction={this.updateProductQuantity.bind(this)}/>
             }>
         </FlatList>
-    )
+    );
   }
 }
 
