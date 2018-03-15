@@ -1,16 +1,16 @@
-import {StackNavigator} from 'react-navigation';
 import {WelcomeScreen} from '../screens';
+import {StackNavigator} from 'react-navigation';
 
-const LoggedOutStack = StackNavigator(
+const AuthStack = StackNavigator(
     {
       Welcome: {
         screen: WelcomeScreen
       },
     },
     {
-      initialScreen: 'Welcome',
+      initialRouteName: 'Welcome',
       headerMode: 'none',
     },
 );
 
-export {LoggedOutStack};
+export {AuthStack};

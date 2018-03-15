@@ -35,11 +35,15 @@ class DashboardScreen extends React.Component {
           // update stores in redux
           dispatch(actions.stores.updateStores(stores));
         });
+
+    // Load and listen to changes to the catalog
+    this.unsubscribeCatalog = dispatch(actions.stores.loadCatalog());
   }
 
   componentWillUnmount() {
     // Stop listening to changes
     this.unsubscribeStores();
+    this.unsubscribeCatalog();
   }
 
   activateStore(store) {

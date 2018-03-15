@@ -7,13 +7,8 @@ import firebase from 'react-native-firebase';
 class AuthLoadingScreen extends Component {
 
   componentDidMount() {
-    const {dispatch} = this.props;
-
-    // Start loading and get login state
-    // dispatch(actions.ui.startLoading('Estamos abrindo sua loja...'));
 
     this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
-      // dispatch(actions.ui.stopLoading());  // finish loading
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.
       this.props.navigation.navigate(user ? 'App' : 'Auth');
@@ -26,7 +21,6 @@ class AuthLoadingScreen extends Component {
   }
 
   render() {
-    const {loadingMessage} = this.props;
     return(
         <Loading message={'Estamos abrindo sua loja...'} />
     );
@@ -34,7 +28,6 @@ class AuthLoadingScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loadingMessage: state.ui.loadingMessage
 });
 
 AuthLoadingScreen = connect(mapStateToProps)(AuthLoadingScreen);

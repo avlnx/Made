@@ -61,6 +61,7 @@ class WelcomeScreen extends React.Component {
     const {dispatch} = this.props;
     if(!this.state.email) {
       alert("Você precisa preencher o campo email.");
+      return;
     }
     dispatch(actions.auth.sendRecoveryPassword(this.state.email));
   }

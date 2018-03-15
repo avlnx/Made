@@ -16,29 +16,12 @@ class StoreFrontScreen extends React.Component {
     this.db = firebase.firestore();
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const uid = firebase.auth().currentUser.uid;
     const {dispatch, activeStore} = this.props;
 
-    // Get and listen to changes to the catalog
-    const catalog = 'made';
-    this.unsubscribeProducts = this.db.collection('catalog').
-        doc(catalog).
-        collection('products').
-        onSnapshot(function(querySnapshot) {
-          let products = [];
-          querySnapshot.forEach(function(doc) {
-            // put full catalog in redux
-            let data = doc.data();
-            data.id = doc.id;
-            products.push(data);
-          });
-          // update products in redux
-          dispatch(actions.stores.updateCatalog(products));
-          dispatch(actions.stores.updateProductsInStock());
-          // Reset cart, prices might have changed which would cause inconsistencies
-          dispatch(actions.stores.clearCart());
-        });
+    // Load and listen to changes to the catalog
+    this.unsubscribeCatalog = dispatch(actions.stores.loadCatalog());
 
     // Get and listen to changes to the active store (like inventory)
     this.unsubscribeStore = this.db.collection('users').
@@ -57,7 +40,7 @@ class StoreFrontScreen extends React.Component {
   componentWillUnmount() {
     // Stop listening to changes
     this.unsubscribeStore();
-    this.unsubscribeProducts();
+    this.unsubscribeCatalog();
   }
 
   render() {

@@ -1,8 +1,10 @@
-export * from './WelcomeScreen';
-// export * from './OnboardingScreen';
-export * from './DashboardScreen';
-// export * from './AddProductsToPOSScreen';
-export * from './StoreFrontScreen';
-export * from './StoreConfigScreen';
-export * from './LoadingScreen';
+// auth
 export * from './AuthLoadingScreen';
+export * from './WelcomeScreen';
+// app
+export * from './DashboardScreen';
+export * from './StoreConfigScreen';
+// store
+export * from './StoreFrontScreen';
+// ui
+export * from './LoadingScreen';

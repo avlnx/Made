@@ -39,6 +39,31 @@ const stores = {
     // action activateStore. I don't see why you would call this action directly
     return {type: types.SET_ACTIVE_STORE, payload: payload};
   },
+  loadCatalog: () => {
+    return function(dispatch, getState) {
+      return firebase.firestore().collection('catalog').
+          doc('made').
+          collection('products').
+          onSnapshot(function(querySnapshot) {
+            let products = [];
+            querySnapshot.forEach(function(doc) {
+              // put full catalog in redux
+              let data = doc.data();
+              data.id = doc.id;
+              products.push(data);
+            });
+            // update products in redux
+            dispatch(actions.stores.updateCatalog(products));
+            if (getState().stores.activeStore) {
+              // If there's a store active update the products in stock for the
+              // active store and reset the cart
+              dispatch(actions.stores.updateProductsInStock());
+              // Reset cart, prices might have changed which would cause inconsistencies
+              dispatch(actions.stores.clearCart());
+            }
+          });
+    }
+  },
   updateCatalog: (payload) => {
     // This action updates the catalog, it set the 'catalog' store variable to
     // be used in the action below (updateProductsInStock)
