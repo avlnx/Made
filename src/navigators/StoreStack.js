@@ -1,5 +1,6 @@
 import {StackNavigator} from 'react-navigation';
 import {StoreFrontScreen} from '../screens';
+import navStyles from './styles';
 
 const StoreStack = StackNavigator(
     {
@@ -9,7 +10,7 @@ const StoreStack = StackNavigator(
     },
     {
       initialRouteName: 'StoreFront',
-      headerMode: 'none',
+      navigationOptions: navStyles
     },
 );
 

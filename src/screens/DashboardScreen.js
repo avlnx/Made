@@ -1,7 +1,6 @@
 import React from 'react';
 import {Container, Content, H1, H2, Button, Text, View} from 'native-base';
 import actions from '../reducers/actions';
-import {MadeHeader} from '../components/common';
 import {StoreList} from '../components';
 import firebase from 'react-native-firebase';
 import {connect} from 'react-redux';
@@ -38,6 +37,10 @@ class DashboardScreen extends React.Component {
 
     // Load and listen to changes to the catalog
     this.unsubscribeCatalog = dispatch(actions.stores.loadCatalog());
+
+    // Set a param to show the logout button on the right
+    this.props.navigation.setParams({ showLogOut: true });
+
   }
 
   componentWillUnmount() {
@@ -61,7 +64,6 @@ class DashboardScreen extends React.Component {
     const {stores} = this.props;
     return (
         <Container>
-          <MadeHeader title={'Dashboard'} navigation={this.props.navigation}/>
           <Content>
             <StoreList items={stores}
                        actionActivate={this.activateStore.bind(this)}

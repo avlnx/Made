@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Spinner from 'react-native-spinkit';
 import {H1} from 'native-base';
-import {MadeLogo} from './';
+import {MadeHeaderLogo} from './';
 
 /*
 Spinner types: [
@@ -17,7 +17,7 @@ class Loading extends Component {
     return (
         <View style={styles.container}>
           <View style={styles.logoContainer}>
-            <MadeLogo />
+            <MadeHeaderLogo style={{height: 150, width: 300}} />
           </View>
           <View style={styles.spinnerContainer}>
             <Spinner style={styles.spinner} isVisible={true} size={102} type={'Wave'} />
@@ -31,7 +31,7 @@ class Loading extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#eaed7a',
+    backgroundColor: '#2ECC71',
     alignItems: 'center',
     justifyContent: 'center'
   },

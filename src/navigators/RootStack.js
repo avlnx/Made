@@ -1,8 +1,10 @@
 import {AuthLoadingScreen} from '../screens';
 import {SwitchNavigator} from 'react-navigation';
 import {AppStack, AuthStack, StoreStack} from './';
+import {MadeHeaderLogo} from '../components/common';
+import React from 'react';
 
-const RootStack =  SwitchNavigator(
+const RootStack = SwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
       App: AppStack,
@@ -11,7 +13,20 @@ const RootStack =  SwitchNavigator(
     },
     {
       initialRouteName: 'AuthLoading',
-    }
+      navigationOptions: {
+        // headerTitle: <MadeHeaderLogo/>,
+        headerStyle: {
+          backgroundColor: '#2ECC71',
+        }
+        // headerStyle: {
+        //   backgroundColor: '#f4511e',
+        // },
+        // headerTintColor: '#fff',
+        // headerTitleStyle: {
+        //   fontWeight: 'bold',
+        // },
+      },
+    },
 );
 
 export {RootStack};

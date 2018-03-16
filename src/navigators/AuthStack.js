@@ -1,5 +1,6 @@
 import {WelcomeScreen} from '../screens';
 import {StackNavigator} from 'react-navigation';
+import navOptions from './styles';
 
 const AuthStack = StackNavigator(
     {
@@ -9,7 +10,7 @@ const AuthStack = StackNavigator(
     },
     {
       initialRouteName: 'Welcome',
-      headerMode: 'none',
+      navigationOptions: navOptions,
     },
 );
 

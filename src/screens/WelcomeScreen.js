@@ -12,7 +12,7 @@ import {
 import firebase from 'react-native-firebase';
 import {connect} from 'react-redux';
 
-import {Hero, Loading} from '../components/common';
+import {Hero, Loading, MadeHeaderLogo} from '../components/common';
 import {LoginForm} from '../components/LoginForm';
 import actions from '../reducers/actions';
 
@@ -33,9 +33,12 @@ class WelcomeScreen extends React.Component {
 
   loginUser() {
     const {email, password} = this.state;
-    const {dispatch} = this.props;
-    // dispatch(actions.ui.startLoading('Verificando suas credenciais...'));
     this.setState({loadingMessage: 'Verificando suas credenciais...'});
+    if (!email || !password) {
+      alert('Você precisa preencher seu email e senha');
+      this.setState({loadingMessage: null});
+      return;
+    }
     firebase.auth().
         signInAndRetrieveDataWithEmailAndPassword(email, password).
         catch((e) => {
@@ -74,10 +77,10 @@ class WelcomeScreen extends React.Component {
     const {loadingMessage} = this.state;
     if (loadingMessage) return(<Loading message={loadingMessage}/>);
     return (
-            <Container>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <View style={{flex: 1, padding: 30}}>
-                  <Hero/>
+            <Container style={{backgroundColor: '#2ECC71'}}>
+              <View style={{flex: 1, flexDirection: 'row', padding: 15}}>
+                <View style={{flex: 1, padding: 30, justifyContent: 'center'}}>
+                  <MadeHeaderLogo style={{height: 150, width: 300}} />
                 </View>
                 <View style={{flex: 1}}>
                   <LoginForm currentEmail={this.state.email}

@@ -46,7 +46,7 @@ class StoreFrontScreen extends React.Component {
   render() {
     return (
         <Container>
-          <MadeLogo/>
+          {/*<MadeLogo/>*/}
           <Content>
             <StoreProductList/>
           </Content>

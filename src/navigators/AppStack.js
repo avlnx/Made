@@ -1,5 +1,6 @@
 import {StackNavigator} from 'react-navigation';
 import {DashboardScreen, LoadingScreen, StoreConfigScreen} from '../screens';
+import navOptions from './styles';
 
 const AppStack = StackNavigator(
     {
@@ -15,7 +16,7 @@ const AppStack = StackNavigator(
     },
     {
       initialRouteName: 'Dashboard',
-      headerMode: 'none',
+      navigationOptions: navOptions
     },
 );
 
