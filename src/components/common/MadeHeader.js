@@ -31,7 +31,7 @@ class MadeHeader extends Component {
           </Left>
           <Body style={{flex: 4, alignItems: 'center'}}>
           <Image resizeMode="contain" style={styles.headerImage}
-                 source={require('../../resources/img/made-app-logo.png')}/>
+                 source={require('../../resources/img/made-new-icon.png')}/>
           </Body>
           <Right style={{flex: 1}}>
             {firebase.auth().currentUser ?
