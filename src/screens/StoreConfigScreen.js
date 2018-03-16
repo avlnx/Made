@@ -104,7 +104,7 @@ class StoreConfigScreen extends Component {
         message={'Carregando dados dos produtos'}/>;
     return (
         <Container>
-          <MadeHeader navigation={this.props.navigation}/>
+          <MadeHeader navigation={this.props.navigation} backEnabled={true}/>
           <Content padder>
             <H1 style={styles.title}>Editando {this.state.nickname}</H1>
             <Card>

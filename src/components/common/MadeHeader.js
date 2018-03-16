@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Image, StyleSheet} from 'react-native';
 // import {View, H3, Text} from 'native-base';
 import {
   Header,
@@ -21,23 +22,37 @@ class MadeHeader extends Component {
     return (
         <Header>
           <Left style={{flex: 1}}>
-            <SmallText style={{color: 'white'}}>MADE</SmallText>
+            {this.props.backEnabled ?
+                <Button default small icon
+                        onPress={() => navigation.goBack()}>
+                  <Icon name={'arrow-back'} />
+                </Button> : null
+            }
           </Left>
-          <Body style={{flex: 4}}>
-            <Title>{this.props.title}</Title>
+          <Body style={{flex: 4, alignItems: 'center'}}>
+          <Image resizeMode="contain" style={styles.headerImage}
+                 source={require('../../resources/img/made-app-logo.png')}/>
           </Body>
           <Right style={{flex: 1}}>
-            {firebase.auth().currentUser ? <Button default small onPress={() => dispatch(actions.auth.logOut(navigation))}>
-              <Text>Sair</Text>
-            </Button> : null}
+            {firebase.auth().currentUser ?
+                <Button default small onPress={() => dispatch(
+                    actions.auth.logOut(navigation))}>
+                  <Text>Sair</Text>
+                </Button> :
+                null}
           </Right>
         </Header>
     );
   }
 }
 
-// export {MadeHeader};
+const styles = StyleSheet.create({
+  headerImage: {
+    width: 101,
+    height: 33,
+    // flex: 1,
+  },
+});
 
 MadeHeader = connect(() => ({}))(MadeHeader);
-
 export {MadeHeader};
