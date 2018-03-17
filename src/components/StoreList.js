@@ -57,32 +57,4 @@ const StoreList = (props) => {
   );
 };
 
-/*
-<Card>
-        <CardItem header>
-          <Text>Suas Lojas</Text>
-        </CardItem>
-        <CardItem>
-          <Body>
-          <Text>
-            Loja 1
-          </Text>
-          </Body>
-        </CardItem>
-        <CardItem>
-          <Body>
-          <Text>
-            Loja 2
-          </Text>
-          </Body>
-        </CardItem>
-        <CardItem>
-          <Body>
-          <Text>
-            Loja 3
-          </Text>
-          </Body>
-        </CardItem>
-      </Card>
- */
 export {StoreList};

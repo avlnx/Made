@@ -16,12 +16,15 @@ import {
 import {connect} from 'react-redux';
 
 class StoreProductListItem extends Component {
-  getCurrentQuantityInCartForProduct(productId) {
-    const {cart} = this.props;
-    if (!cart[productId]) {
+
+  getCurrentQuantityIn(where, productId) {
+    const locationOfQuery = where === 'cart' ?
+        this.props.cart :
+        this.props.activeStore.inventory;
+    if (!locationOfQuery[productId]) {
       return 0;
     }
-    return cart[productId];
+    return locationOfQuery[productId];
   }
 
   render() {
@@ -61,20 +64,34 @@ class StoreProductListItem extends Component {
               <Button transparent style={{marginRight: 10}}>
                 <Text style={{color: '#333'}}>Mais informações</Text>
               </Button>
-              <Button disabled={!this.getCurrentQuantityInCartForProduct(item.id)} style={{marginRight: 10}}
-                      onPress={() => this.props.updateAction(item, '-')}>
-                <Icon name='remove'/>
-              </Button>
-              <Button onPress={() => this.props.updateAction(item, '+')}>
-                <Icon name='add'/>
-              </Button>
+              {this.getCurrentQuantityIn('inventory', item.id) ?
+                  <View style={{flexDirection: 'row'}}>
+                    <Button
+                        disabled={!this.getCurrentQuantityIn('cart', item.id)}
+                        style={{marginRight: 10}}
+                        onPress={() => this.props.updateAction(item, '-')}>
+                      <Icon name='remove'/>
+                    </Button>
+                    <Button
+                        disabled={this.getCurrentQuantityIn('inventory', item.id) === this.getCurrentQuantityIn('cart', item.id)}
+                        onPress={() => this.props.updateAction(item, '+')}>
+                      <Icon name='add'/>
+                    </Button>
+                  </View>
+                  :
+                  <Text>Acabou :(</Text>}
             </CardItem>
-            {this.getCurrentQuantityInCartForProduct(item.id) > 0 ?
-                <Badge style={{position: 'absolute', bottom: 10, left: 10, backgroundColor: '#333'}}>
+            {this.getCurrentQuantityIn('cart', item.id) > 0 ?
+                <Badge style={{
+                  position: 'absolute',
+                  bottom: 10,
+                  left: 10,
+                  backgroundColor: '#333',
+                }}>
                   <Text style={{fontSize: 24, lineHeight: 28, color: 'white'}}>
-                    {this.getCurrentQuantityInCartForProduct(item.id)}
+                    {this.getCurrentQuantityIn('cart', item.id)}
                   </Text>
-                </Badge>:null}
+                </Badge> : null}
           </Card>
         </View>
     );
@@ -83,6 +100,7 @@ class StoreProductListItem extends Component {
 
 const mapStateToProps = (state) => ({
   cart: state.stores.cart,
+  activeStore: state.stores.activeStore,
 });
 StoreProductListItem = connect(mapStateToProps)(StoreProductListItem);
 export {StoreProductListItem};
