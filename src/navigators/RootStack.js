@@ -13,19 +13,6 @@ const RootStack = SwitchNavigator(
     },
     {
       initialRouteName: 'AuthLoading',
-      navigationOptions: {
-        // headerTitle: <MadeHeaderLogo/>,
-        headerStyle: {
-          backgroundColor: '#2ECC71',
-        }
-        // headerStyle: {
-        //   backgroundColor: '#f4511e',
-        // },
-        // headerTintColor: '#fff',
-        // headerTitleStyle: {
-        //   fontWeight: 'bold',
-        // },
-      },
     },
 );
 

@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import {Loading} from '../components/common';
-import actions from '../reducers/actions';
 import firebase from 'react-native-firebase';
 
 class AuthLoadingScreen extends Component {
@@ -27,8 +25,4 @@ class AuthLoadingScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-});
-
-AuthLoadingScreen = connect(mapStateToProps)(AuthLoadingScreen);
 export {AuthLoadingScreen};
