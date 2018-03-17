@@ -19,8 +19,8 @@ import {
   View,
 } from 'native-base';
 import firebase from 'react-native-firebase';
-import {MadeHeader, Loading} from '../components/common';
-import actions from '../reducers/actions';
+import {Loading} from '../components/common';
+import {ProductQuantityList} from '../components';
 
 class StoreConfigScreen extends Component {
   constructor() {
@@ -93,7 +93,6 @@ class StoreConfigScreen extends Component {
   }
 
   saveStoreData() {
-    // alert('Data saved dude');
     let uid = firebase.auth().currentUser.uid;
     let storeRef = this.db.collection('users').
         doc(uid).
@@ -110,15 +109,13 @@ class StoreConfigScreen extends Component {
     storeRef.update({
       inventory: strippedInventory,
       nickname: this.state.nickname,
-    })
-    .then(function() {
-      console.log("Document successfully updated!");
+    }).then(function() {
+      console.log('Document successfully updated!');
       // stop loading
       that.setState({loadingMessage: null});
       // all is well, redirect back to Dashboard
       that.props.navigation.goBack();
-    })
-    .catch(function(error) {
+    }).catch(function(error) {
       // The document probably doesn't exist.
       that.setState({loadingMessage: null});
       alert(error);
@@ -149,35 +146,9 @@ class StoreConfigScreen extends Component {
               </CardItem>
             </Card>
             <H2 style={styles.title}>Estoque da sua loja</H2>
-            <Card>
-              <FlatList
-                  data={this.state.storesInventory}
-                  keyExtractor={item => item.id}
-                  renderItem={({item}) =>
-                      <CardItem>
-                        <View style={styles.listDataStyle}>
-                          <Badge primary
-                                 style={styles.badgeStyle}><Text
-                              style={styles.badgeTextStyle}>{item.quantity}</Text></Badge>
-                          <Text>{item.title}</Text>
-                        </View>
-                        <View style={styles.listActionsStyle}>
-                          <Button icon small style={styles.removeButtonStyle}
-                                  disabled={item.quantity === 0}
-                                  onPress={() => this.updateQuantityForProduct(
-                                      item, '-')}>
-                            <Icon name={'remove'}/>
-                          </Button>
-                          <Button icon small
-                                  onPress={() => this.updateQuantityForProduct(
-                                      item, '+')}>
-                            <Icon name={'add'}/>
-                          </Button>
-                        </View>
-                      </CardItem>
-                  }>
-              </FlatList>
-            </Card>
+            <ProductQuantityList data={this.state.storesInventory}
+                                 updateQuantityForProduct={this.updateQuantityForProduct.bind(
+                                     this)}/>
             <View style={{
               justifyContent: 'center',
               flex: 1,
@@ -188,7 +159,8 @@ class StoreConfigScreen extends Component {
               <Button light onPress={() => this.saveStoreData()}>
                 <Text>Salvar</Text>
               </Button>
-              <Button iconLeft transparent onPress={() => this.props.navigation.goBack()}>
+              <Button iconLeft transparent
+                      onPress={() => this.props.navigation.goBack()}>
                 <Icon name={'arrow-back'}/>
                 <Text>Cancelar</Text>
               </Button>
@@ -202,26 +174,6 @@ class StoreConfigScreen extends Component {
 const styles = StyleSheet.create({
   title: {
     marginVertical: 20,
-  },
-  badgeStyle: {
-    marginRight: 10,
-    backgroundColor: '#333',
-  },
-  badgeTextStyle: {
-    color: 'white',
-    fontSize: 18,
-  },
-  listDataStyle: {
-    flex: 4,
-    flexDirection: 'row',
-  },
-  listActionsStyle: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  removeButtonStyle: {
-    marginRight: 10,
   },
 });
 

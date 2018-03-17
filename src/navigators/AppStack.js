@@ -10,9 +10,6 @@ const AppStack = StackNavigator(
       StoreConfig: {
         screen: StoreConfigScreen,
       },
-      Loading: {
-        screen: LoadingScreen,
-      }
     },
     {
       initialRouteName: 'Dashboard',
