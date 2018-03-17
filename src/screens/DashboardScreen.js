@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Content, H1, H2, Button, Text, View} from 'native-base';
+import {Container, Content} from 'native-base';
 import actions from '../reducers/actions';
 import {StoreList} from '../components';
 import firebase from 'react-native-firebase';
