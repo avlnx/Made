@@ -1,26 +1,9 @@
 import React, {Component} from 'react';
-import {StyleSheet, FlatList} from 'react-native';
 import {connect} from 'react-redux';
-import {
-  Text,
-  Container,
-  Content,
-  Badge,
-  H1,
-  H2,
-  Card,
-  CardItem,
-  Form,
-  Item,
-  Label,
-  Input,
-  Button,
-  Icon,
-  View,
-} from 'native-base';
 import firebase from 'react-native-firebase';
+import {Container} from 'native-base';
 import {Loading} from '../components/common';
-import {ProductQuantityList} from '../components';
+import {StoreConfigForm} from '../components';
 
 class StoreConfigScreen extends Component {
   constructor() {
@@ -125,57 +108,21 @@ class StoreConfigScreen extends Component {
   render() {
     if (this.state.loadingMessage) return <Loading
         message={this.state.loadingMessage}/>;
+        
     return (
         <Container>
-          <Content padder>
-            <H1 style={styles.title}>Editando {this.state.nickname}</H1>
-            <Card>
-              <CardItem>
-                <Form>
-                  <Item>
-                    <Label>Apelido da sua loja</Label>
-                    <Input
-                        value={this.state.nickname}
-                        onChangeText={nickname => this.updateNicknameInput(
-                            nickname)}
-                        autoCorrect={false}/>
-                  </Item>
-                  <Text note>Esse valor é apenas para seu controle. Seus
-                    clientes não verão o apelido da sua loja.</Text>
-                </Form>
-              </CardItem>
-            </Card>
-            <H2 style={styles.title}>Estoque da sua loja</H2>
-            <ProductQuantityList data={this.state.storesInventory}
-                                 updateQuantityForProduct={this.updateQuantityForProduct.bind(
-                                     this)}/>
-            <View style={{
-              justifyContent: 'center',
-              flex: 1,
-              alignContent: 'center',
-              alignItems: 'center',
-              marginTop: 20,
-            }}>
-              <Button light onPress={() => this.saveStoreData()}>
-                <Text>Salvar</Text>
-              </Button>
-              <Button iconLeft transparent
-                      onPress={() => this.props.navigation.goBack()}>
-                <Icon name={'arrow-back'}/>
-                <Text>Cancelar</Text>
-              </Button>
-            </View>
-          </Content>
+          <StoreConfigForm
+              updateQuantityForProduct={this.updateQuantityForProduct.bind(
+                  this)}
+              nickname={this.state.nickname}
+              data={this.state.storesInventory}
+              saveAction={this.saveStoreData.bind(this)}
+              cancelAction={this.props.navigation.goBack()}
+          />
         </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  title: {
-    marginVertical: 20,
-  },
-});
 
 const mapStateToProps = (state) => ({
   stores: state.stores.storeList,
