@@ -20,6 +20,7 @@ import {
 } from 'native-base';
 import firebase from 'react-native-firebase';
 import {MadeHeader, Loading} from '../components/common';
+import actions from '../reducers/actions';
 
 class StoreConfigScreen extends Component {
   constructor() {
@@ -28,9 +29,14 @@ class StoreConfigScreen extends Component {
     // set initial store info
     this.state = {
       nickname: null,
-      loading: true,
+      loadingMessage: 'Carregando dados dos produtos',
       storesInventory: null,
     };
+
+    this.store = null;
+
+    // firebase instance
+    this.db = firebase.firestore();
   }
 
   componentWillMount() {
@@ -52,7 +58,6 @@ class StoreConfigScreen extends Component {
       let that = this;
       Object.keys(this.store.inventory).forEach(function(key, index) {
         // key: the name of the object key
-        // index: the ordinal position of the key within the object
         let productTitle = that.props.catalog.filter((product) => {
           return product.id === key;
         }).shift().title;
@@ -62,22 +67,10 @@ class StoreConfigScreen extends Component {
           id: key,
         });
       });
-      // for (let [value, key] in this.store.inventory) {
-      //   storesInventory[key] = {
-      //     quantity: value,
-      //     title: this.props.catalog[key].title,
-      //   };
-      // }
-      // this.store.inventory.forEach((item, key) => {
-      //   storesInventory[key] = {
-      //     quantity: item,
-      //     title: this.props.catalog[key].title,
-      //   };
-      // });
-      // this.storesInventory = storesInventory;
       this.setState({storesInventory});
     }
-    this.setState({loading: false});
+    // stop loading
+    this.setState({loadingMessage: null});
   }
 
   updateNicknameInput(nickname) {
@@ -99,9 +92,42 @@ class StoreConfigScreen extends Component {
     });
   }
 
+  saveStoreData() {
+    // alert('Data saved dude');
+    let uid = firebase.auth().currentUser.uid;
+    let storeRef = this.db.collection('users').
+        doc(uid).
+        collection('stores').
+        doc(this.store.id);
+
+    // Set new inventory for this store
+    this.setState({loadingMessage: 'Salvando dados da sua loja'});
+    let that = this;
+    let strippedInventory = {};
+    this.state.storesInventory.forEach((product) => {
+      strippedInventory[product.id] = product.quantity;
+    });
+    storeRef.update({
+      inventory: strippedInventory,
+      nickname: this.state.nickname,
+    })
+    .then(function() {
+      console.log("Document successfully updated!");
+      // stop loading
+      that.setState({loadingMessage: null});
+      // all is well, redirect back to Dashboard
+      that.props.navigation.goBack();
+    })
+    .catch(function(error) {
+      // The document probably doesn't exist.
+      that.setState({loadingMessage: null});
+      alert(error);
+    });
+  }
+
   render() {
-    if (this.state.loading) return <Loading
-        message={'Carregando dados dos produtos'}/>;
+    if (this.state.loadingMessage) return <Loading
+        message={this.state.loadingMessage}/>;
     return (
         <Container>
           <Content padder>
@@ -130,8 +156,9 @@ class StoreConfigScreen extends Component {
                   renderItem={({item}) =>
                       <CardItem>
                         <View style={styles.listDataStyle}>
-                          <Badge info
-                                 style={styles.badgeStyle}><Text>{item.quantity}</Text></Badge>
+                          <Badge primary
+                                 style={styles.badgeStyle}><Text
+                              style={styles.badgeTextStyle}>{item.quantity}</Text></Badge>
                           <Text>{item.title}</Text>
                         </View>
                         <View style={styles.listActionsStyle}>
@@ -151,6 +178,21 @@ class StoreConfigScreen extends Component {
                   }>
               </FlatList>
             </Card>
+            <View style={{
+              justifyContent: 'center',
+              flex: 1,
+              alignContent: 'center',
+              alignItems: 'center',
+              marginTop: 20,
+            }}>
+              <Button light onPress={() => this.saveStoreData()}>
+                <Text>Salvar</Text>
+              </Button>
+              <Button iconLeft transparent onPress={() => this.props.navigation.goBack()}>
+                <Icon name={'arrow-back'}/>
+                <Text>Cancelar</Text>
+              </Button>
+            </View>
           </Content>
         </Container>
     );
@@ -163,6 +205,11 @@ const styles = StyleSheet.create({
   },
   badgeStyle: {
     marginRight: 10,
+    backgroundColor: '#333',
+  },
+  badgeTextStyle: {
+    color: 'white',
+    fontSize: 18,
   },
   listDataStyle: {
     flex: 4,

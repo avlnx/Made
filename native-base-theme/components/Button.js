@@ -27,13 +27,13 @@ export default (variables = variable) => {
   }
   const primaryCommon = {
     'NativeBase.Text': {
-      color: variables.btnPrimaryBg,
+      color: variables.btnPrimaryColor,
     },
     'NativeBase.Icon': {
-      color: variables.btnPrimaryBg,
+      color: variables.btnPrimaryColor,
     },
     'NativeBase.IconNB': {
-      color: variables.btnPrimaryBg,
+      color: variables.btnPrimaryColor,
     }
   }
   const successCommon = {

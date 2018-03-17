@@ -11,13 +11,13 @@ export default ({navigation}) => {
     headerStyle: {
       backgroundColor: '#2ECC71',
       // get rid of ugly shadow
-      shadowColor: 'transparent',
-      shadowOpacity: 0,
-      shadowRadius: 0,
-      shadowOffset: {
-        height: 0,
-      },
+      shadowColor: undefined,
+      shadowOpacity: undefined,
+      shadowRadius: undefined,
+      shadowOffset: undefined,
       elevation: 0,
+      paddingVertical: 10,
+      height: 90,
     },
     headerTintColor: 'white',
     headerTitleStyle: {

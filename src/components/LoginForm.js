@@ -29,7 +29,7 @@ class LoginForm extends Component {
 
     return (
         <View style={{flex: 1, justifyContent: 'center', paddingTop: 90}}>
-          <H1 style={{fontSize: 24, lineHeight: 24}}>Faça
+          <H1>Faça
             login para personalizar sua experiência</H1>
           <Form>
             <Item>
@@ -53,7 +53,7 @@ class LoginForm extends Component {
                           password)}/>
                 </Item>
             }
-            <Button iconRight primary
+            <Button iconRight light
                     onPress={lostPasswordMode ?
                         sendPasswordRecoveryEmailAction :
                         loginUserAction}>

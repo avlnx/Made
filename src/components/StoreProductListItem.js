@@ -5,6 +5,7 @@ import {
   Card,
   CardItem,
   Body,
+  H2,
   H3,
   Right,
   Text,
@@ -30,7 +31,7 @@ class StoreProductListItem extends Component {
     const styles = StyleSheet.create({
       itemContainer: {
         width: size,
-        height: 400,
+        height: 440,
         margin: itemMargin,
       },
       item: {
@@ -44,16 +45,10 @@ class StoreProductListItem extends Component {
             <CardItem cardBody>
               <Image source={{uri: item.image}}
                      style={{height: 250, width: null, flex: 1}}/>
-              {this.getCurrentQuantityInCartForProduct(item.id) > 0 ?
-              <Badge style={{position: 'absolute', top: 10, left: 10}}>
-                <Text style={{fontSize: 24, lineHeight: 28}}>
-                  {this.getCurrentQuantityInCartForProduct(item.id)}
-                </Text>
-              </Badge>:null}
             </CardItem>
             <CardItem>
               <Body style={{flex: 2}}>
-              <H3>{item.title}</H3>
+              <H2 style={{marginRight: 10}}>{item.title}</H2>
               </Body>
               <Right style={{flex: 1}}>
                 <Text style={{
@@ -63,8 +58,8 @@ class StoreProductListItem extends Component {
               </Right>
             </CardItem>
             <CardItem style={{justifyContent: 'flex-end'}}>
-              <Button transparent small>
-                <Text>Mais informações</Text>
+              <Button transparent style={{marginRight: 10}}>
+                <Text style={{color: '#333'}}>Mais informações</Text>
               </Button>
               <Button disabled={!this.getCurrentQuantityInCartForProduct(item.id)} style={{marginRight: 10}}
                       onPress={() => this.props.updateAction(item, '-')}>
@@ -74,6 +69,12 @@ class StoreProductListItem extends Component {
                 <Icon name='add'/>
               </Button>
             </CardItem>
+            {this.getCurrentQuantityInCartForProduct(item.id) > 0 ?
+                <Badge style={{position: 'absolute', bottom: 10, left: 10, backgroundColor: '#333'}}>
+                  <Text style={{fontSize: 24, lineHeight: 28, color: 'white'}}>
+                    {this.getCurrentQuantityInCartForProduct(item.id)}
+                  </Text>
+                </Badge>:null}
           </Card>
         </View>
     );

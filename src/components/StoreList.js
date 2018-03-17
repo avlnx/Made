@@ -22,7 +22,7 @@ const StoreList = (props) => {
         <H1 style={{padding: 20, paddingBottom: 0}}>SUAS LOJAS</H1>
         <List dataArray={items}
               renderRow={(item) =>
-                  <ListItem>
+                  <ListItem noBorder>
                     <Card>
                       <CardItem>
                         <Body>

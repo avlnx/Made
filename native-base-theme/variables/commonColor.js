@@ -95,7 +95,9 @@ export default {
   checkboxTickColor: "#fff",
 
   // Color
-  brandPrimary: platform === "ios" ? "#007aff" : "#3F51B5",
+  // brandPrimary: platform === "ios" ? "#007aff" : "#3F51B5",
+  // brandPrimary: "#2ECC71",
+  brandPrimary: "#2ECC71",
   brandInfo: "#62B1F6",
   brandSuccess: "#5cb85c",
   brandDanger: "#d9534f",
@@ -107,7 +109,7 @@ export default {
   fontFamily: platform === "ios" ? "System" : "Roboto",
   fontSizeBase: 15,
   get fontSizeH1() {
-    return this.fontSizeBase * 1.8;
+    return this.fontSizeBase * 2.1;
   },
   get fontSizeH2() {
     return this.fontSizeBase * 1.6;
@@ -219,8 +221,8 @@ export default {
   tabFontSize: 15,
 
   // Text
-  textColor: "#000",
-  inverseTextColor: "#fff",
+  textColor: "#333",
+  inverseTextColor: '#fff',
   noteFontSize: 14,
   get defaultTextColor() {
     return this.textColor;
@@ -236,7 +238,7 @@ export default {
   // Other
   borderRadiusBase: platform === "ios" ? 5 : 2,
   borderWidth: 1 / PixelRatio.getPixelSizeForLayoutSize(1),
-  contentPadding: 10,
+  contentPadding: 15,
   dropdownLinkColor: "#414142",
   inputLineHeight: 24,
   deviceWidth,

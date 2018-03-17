@@ -1,4 +1,7 @@
 import React from 'react';
+import {StyleProvider} from 'native-base';
+import getTheme from './native-base-theme/components';
+import commonColor from './native-base-theme/variables/commonColor';
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
@@ -20,6 +23,10 @@ const store = createStore(reducer,
 
 export default class App extends React.Component {
   render() {
-    return <Provider store={store}><RootStack/></Provider>;
+    return (
+        <StyleProvider style={getTheme(commonColor)}>
+          <Provider store={store}><RootStack/></Provider>
+        </StyleProvider>
+    );
   }
 }
