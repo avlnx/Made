@@ -28,7 +28,7 @@ class StoreProductListItem extends Component {
   }
 
   render() {
-    const itemMargin = 15;
+    const itemMargin = 5;
     const size = (Dimensions.get('window').width - (itemMargin * 4)) /
         this.props.numColumns;
     const styles = StyleSheet.create({
