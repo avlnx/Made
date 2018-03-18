@@ -6,7 +6,6 @@ import {
 import {connect} from 'react-redux';
 import actions from '../reducers/actions';
 import firebase from 'react-native-firebase';
-import {MadeLogo} from '../components/common';
 import {StoreProductList, CartWidget} from '../components';
 
 class StoreFrontScreen extends React.Component {

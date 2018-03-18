@@ -6,7 +6,6 @@ import {
   CardItem,
   Body,
   H2,
-  H3,
   Right,
   Text,
   Button,
@@ -17,31 +16,8 @@ import {connect} from 'react-redux';
 
 class StoreProductListItem extends Component {
 
-  getCurrentQuantityIn(where, productId) {
-    const locationOfQuery = where === 'cart' ?
-        this.props.cart :
-        this.props.activeStore.inventory;
-    if (!locationOfQuery[productId]) {
-      return 0;
-    }
-    return locationOfQuery[productId];
-  }
-
   render() {
-    const itemMargin = 5;
-    const size = (Dimensions.get('window').width - (itemMargin * 4)) /
-        this.props.numColumns;
-    const styles = StyleSheet.create({
-      itemContainer: {
-        width: size,
-        height: 440,
-        margin: itemMargin,
-      },
-      item: {
-        flex: 1,
-      },
-    });
-    const item = this.props.item;
+    const {item, getCurrentQuantityIn} = this.props;
     return (
         <View style={styles.itemContainer}>
           <Card style={styles.item}>
@@ -64,16 +40,17 @@ class StoreProductListItem extends Component {
               <Button transparent style={{marginRight: 10}}>
                 <Text style={{color: '#333'}}>Mais informações</Text>
               </Button>
-              {this.getCurrentQuantityIn('inventory', item.id) ?
+              {getCurrentQuantityIn('inventory', item.id) ?
                   <View style={{flexDirection: 'row'}}>
                     <Button
-                        disabled={!this.getCurrentQuantityIn('cart', item.id)}
+                        disabled={!getCurrentQuantityIn('cart', item.id)}
                         style={{marginRight: 10}}
                         onPress={() => this.props.updateAction(item, '-')}>
                       <Icon name='remove'/>
                     </Button>
                     <Button
-                        disabled={this.getCurrentQuantityIn('inventory', item.id) === this.getCurrentQuantityIn('cart', item.id)}
+                        disabled={getCurrentQuantityIn('inventory', item.id) ===
+                        getCurrentQuantityIn('cart', item.id)}
                         onPress={() => this.props.updateAction(item, '+')}>
                       <Icon name='add'/>
                     </Button>
@@ -81,7 +58,7 @@ class StoreProductListItem extends Component {
                   :
                   <Text>Acabou :(</Text>}
             </CardItem>
-            {this.getCurrentQuantityIn('cart', item.id) > 0 ?
+            {getCurrentQuantityIn('cart', item.id) > 0 ?
                 <Badge style={{
                   position: 'absolute',
                   bottom: 10,
@@ -89,7 +66,7 @@ class StoreProductListItem extends Component {
                   backgroundColor: '#333',
                 }}>
                   <Text style={{fontSize: 24, lineHeight: 28, color: 'white'}}>
-                    {this.getCurrentQuantityIn('cart', item.id)}
+                    {getCurrentQuantityIn('cart', item.id)}
                   </Text>
                 </Badge> : null}
           </Card>
@@ -97,6 +74,20 @@ class StoreProductListItem extends Component {
     );
   }
 }
+
+const itemMargin = 5;
+const size = (Dimensions.get('window').width - (itemMargin * 4)) /
+    this.props.numColumns;
+const styles = StyleSheet.create({
+  itemContainer: {
+    width: size,
+    height: 440,
+    margin: itemMargin,
+  },
+  item: {
+    flex: 1,
+  },
+});
 
 const mapStateToProps = (state) => ({
   cart: state.stores.cart,

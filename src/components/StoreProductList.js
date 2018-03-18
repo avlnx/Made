@@ -5,12 +5,26 @@ import {StoreProductListItem} from './';
 import actions from '../reducers/actions';
 
 class StoreProductList extends Component {
+  constructor() {
+    super();
+  }
+
   updateProductQuantity(item, operation) {
     const {dispatch} = this.props;
     dispatch(actions.stores.updateProductQuantityInCart({
       product: item,
       operation,
     }));
+  }
+
+  getCurrentQuantityIn(where, productId) {
+    const locationOfQuery = where === 'cart' ?
+        this.props.cart :
+        this.props.activeStore.inventory;
+    if (!locationOfQuery[productId]) {
+      return 0;
+    }
+    return locationOfQuery[productId];
   }
 
   render() {
@@ -24,7 +38,8 @@ class StoreProductList extends Component {
                 <StoreProductListItem
                     item={item}
                     numColumns={2}
-                    updateAction={this.updateProductQuantity.bind(this)}/>
+                    updateAction={this.updateProductQuantity.bind(this)}
+                    getCurrentQuantityIn={this.getCurrentQuantityIn.bind(this)}/>
             }>
         </FlatList>
     );
