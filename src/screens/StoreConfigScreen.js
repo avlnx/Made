@@ -108,7 +108,7 @@ class StoreConfigScreen extends Component {
   render() {
     if (this.state.loadingMessage) return <Loading
         message={this.state.loadingMessage}/>;
-        
+
     return (
         <Container>
           <StoreConfigForm

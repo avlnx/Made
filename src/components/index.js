@@ -6,4 +6,5 @@ export * from './StoreProductListItem';
 export * from './CartWidget';
 export * from './ProductQuantityList';
 export * from './StoreConfigForm';
+export * from './WelcomeWrapper';
 

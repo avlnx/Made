@@ -1,24 +1,14 @@
 import React from 'react';
-import {
-  Container,
-  Content,
-  H1,
-  H2,
-  Button,
-  Text,
-  Icon,
-  View,
-} from 'native-base';
-import firebase from 'react-native-firebase';
 import {connect} from 'react-redux';
-
-import {Hero, Loading, MadeHeaderLogo} from '../components/common';
-import {LoginForm} from '../components/LoginForm';
 import actions from '../reducers/actions';
+import firebase from 'react-native-firebase';
+import {Container} from 'native-base';
+import {Loading} from '../components/common';
+import {WelcomeWrapper} from '../components';
 
 class WelcomeScreen extends React.Component {
   static navigationOptions = {
-    header: null
+    header: null,
   };
 
   constructor() {
@@ -62,8 +52,8 @@ class WelcomeScreen extends React.Component {
 
   sendPasswordRecoveryEmail() {
     const {dispatch} = this.props;
-    if(!this.state.email) {
-      alert("Você precisa preencher o campo email.");
+    if (!this.state.email) {
+      alert('Você precisa preencher o campo email.');
       return;
     }
     dispatch(actions.auth.sendRecoveryPassword(this.state.email));
@@ -75,29 +65,23 @@ class WelcomeScreen extends React.Component {
 
   render() {
     const {loadingMessage} = this.state;
-    if (loadingMessage) return(<Loading message={loadingMessage}/>);
+    if (loadingMessage) return (<Loading message={loadingMessage}/>);
     return (
-            <Container style={{backgroundColor: '#2ECC71'}}>
-              <View style={{flex: 1, flexDirection: 'row', padding: 15}}>
-                <View style={{flex: 1, padding: 30, justifyContent: 'center'}}>
-                  <MadeHeaderLogo style={{height: 150, width: 300}} />
-                </View>
-                <View style={{flex: 1}}>
-                  <LoginForm currentEmail={this.state.email}
-                             currentPassword={this.state.password}
-                             loginUserAction={this.loginUser.bind(this)}
-                             updateUserEmailInput={this.updateUserEmailInput.bind(
-                                 this)}
-                             updateUserPasswordInput={this.updateUserPasswordInput.bind(
-                                 this)}
-                             toggleLostPasswordModeAction={this.toggleLostPasswordMode.bind(
-                                 this)}
-                             sendPasswordRecoveryEmailAction={this.sendPasswordRecoveryEmail.bind(
-                                 this)}
-                             lostPasswordMode={this.state.lostPasswordMode}/>
-                </View>
-              </View>
-            </Container>
+        <Container>
+          <WelcomeWrapper
+              currentEmail={this.state.email}
+              currentPassword={this.state.password}
+              loginUserAction={this.loginUser.bind(this)}
+              updateUserEmailInput={this.updateUserEmailInput.bind(
+                  this)}
+              updateUserPasswordInput={this.updateUserPasswordInput.bind(
+                  this)}
+              toggleLostPasswordModeAction={this.toggleLostPasswordMode.bind(
+                  this)}
+              sendPasswordRecoveryEmailAction={this.sendPasswordRecoveryEmail.bind(
+                  this)}
+              lostPasswordMode={this.state.lostPasswordMode}/>
+        </Container>
     );
   }
 }
