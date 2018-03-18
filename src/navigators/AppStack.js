@@ -1,5 +1,5 @@
 import {StackNavigator} from 'react-navigation';
-import {DashboardScreen, LoadingScreen, StoreConfigScreen} from '../screens';
+import {DashboardScreen, StoreConfigScreen} from '../screens';
 import navOptions from './styles';
 
 const AppStack = StackNavigator(
