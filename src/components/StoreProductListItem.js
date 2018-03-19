@@ -26,9 +26,14 @@ const styles = StyleSheet.create({
 class StoreProductListItem extends Component {
 
   render() {
-    const {item, getCurrentQuantityIn, itemWidth, itemMargin, updateAction} = this.props;
+    const {item, getCurrentQuantityIn, itemWidth, itemMargin, updateAction, setShowcaseProductAction} = this.props;
     return (
-        <View style={[styles.itemContainer, {width: itemWidth, margin: itemMargin}]}>
+        <View style={[
+          styles.itemContainer,
+          {
+            width: itemWidth,
+            margin: itemMargin,
+          }]}>
           <Card style={styles.item}>
             <CardItem cardBody>
               <Image source={{uri: item.image}}
@@ -46,7 +51,10 @@ class StoreProductListItem extends Component {
               </Right>
             </CardItem>
             <CardItem style={{justifyContent: 'flex-end'}}>
-              <Button transparent style={{marginRight: 10}}>
+              <Button
+                  transparent
+                  style={{marginRight: 10}}
+                  onPress={() => setShowcaseProductAction(item)}>
                 <Text style={{color: '#333'}}>Mais informações</Text>
               </Button>
               {getCurrentQuantityIn('inventory', item.id) ?

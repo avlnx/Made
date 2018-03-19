@@ -4,9 +4,16 @@ import {Dimensions, FlatList} from 'react-native';
 import {StoreProductListItem} from './';
 import actions from '../reducers/actions';
 
+import {View, Text, Button} from 'native-base';
+import {ProductShowcase} from './';
+
 class StoreProductList extends Component {
   constructor() {
     super();
+
+    this.state = {
+      showcaseProduct: null,
+    };
   }
 
   updateProductQuantity(item, operation) {
@@ -27,10 +34,20 @@ class StoreProductList extends Component {
     return locationOfQuery[productId];
   }
 
+  setShowcaseProduct(product) {
+    this.setState({showcaseProduct: product});
+  }
+
   render() {
     const numColumns = 2;
     const itemMargin = 5;
-    const itemWidth = (Dimensions.get('window').width - (itemMargin * 4)) / numColumns;
+    const itemWidth = (Dimensions.get('window').width - (itemMargin * 4)) /
+        numColumns;
+    if (this.state.showcaseProduct) return (
+        <ProductShowcase product={this.state.showcaseProduct}
+                         cancelAction={() => this.setState(
+                             {showcaseProduct: null})}/>
+    );
     return (
         <FlatList
             data={this.props.productListInStock}
@@ -43,7 +60,9 @@ class StoreProductList extends Component {
                     updateAction={this.updateProductQuantity.bind(this)}
                     getCurrentQuantityIn={this.getCurrentQuantityIn.bind(this)}
                     itemWidth={itemWidth}
-                    itemMargin={itemMargin}/>
+                    itemMargin={itemMargin}
+                    setShowcaseProductAction={this.setShowcaseProduct.bind(
+                        this)}/>
             }>
         </FlatList>
     );
