@@ -14,7 +14,7 @@ import {
   View,
   Icon,
 } from 'native-base';
-
+// TODO use FlatList
 const StoreList = (props) => {
   const {items, actionActivate, storeConfigAction} = props;
   return (

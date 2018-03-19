@@ -15,6 +15,11 @@ class StoreFrontScreen extends React.Component {
     this.db = firebase.firestore();
   }
 
+  componentWillMount() {
+    // Set a param to show the logout button on the right
+    this.props.navigation.setParams({ headerRightButton: 'closeStore' });
+  }
+
   componentDidMount() {
     const uid = firebase.auth().currentUser.uid;
     const {dispatch, activeStore} = this.props;

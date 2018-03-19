@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {FlatList} from 'react-native';
+import {Dimensions, FlatList} from 'react-native';
 import {StoreProductListItem} from './';
 import actions from '../reducers/actions';
 
@@ -29,6 +29,8 @@ class StoreProductList extends Component {
 
   render() {
     const numColumns = 2;
+    const itemMargin = 5;
+    const itemWidth = (Dimensions.get('window').width - (itemMargin * 4)) / numColumns;
     return (
         <FlatList
             data={this.props.productListInStock}
@@ -37,9 +39,11 @@ class StoreProductList extends Component {
             renderItem={({item}) =>
                 <StoreProductListItem
                     item={item}
-                    numColumns={2}
+                    numColumns={numColumns}
                     updateAction={this.updateProductQuantity.bind(this)}
-                    getCurrentQuantityIn={this.getCurrentQuantityIn.bind(this)}/>
+                    getCurrentQuantityIn={this.getCurrentQuantityIn.bind(this)}
+                    itemWidth={itemWidth}
+                    itemMargin={itemMargin}/>
             }>
         </FlatList>
     );
@@ -48,6 +52,8 @@ class StoreProductList extends Component {
 
 const mapStateToProps = (state) => ({
   productListInStock: state.stores.productListInStock,
+  activeStore: state.stores.activeStore,
+  cart: state.stores.cart,
 });
 
 StoreProductList = connect(mapStateToProps)(StoreProductList);

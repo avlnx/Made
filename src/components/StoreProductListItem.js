@@ -14,12 +14,21 @@ import {
 } from 'native-base';
 import {connect} from 'react-redux';
 
+const styles = StyleSheet.create({
+  itemContainer: {
+    height: 440,
+  },
+  item: {
+    flex: 1,
+  },
+});
+
 class StoreProductListItem extends Component {
 
   render() {
-    const {item, getCurrentQuantityIn} = this.props;
+    const {item, getCurrentQuantityIn, itemWidth, itemMargin} = this.props;
     return (
-        <View style={styles.itemContainer}>
+        <View style={[styles.itemContainer, {width: itemWidth, margin: itemMargin}]}>
           <Card style={styles.item}>
             <CardItem cardBody>
               <Image source={{uri: item.image}}
@@ -75,23 +84,8 @@ class StoreProductListItem extends Component {
   }
 }
 
-const itemMargin = 5;
-const size = (Dimensions.get('window').width - (itemMargin * 4)) /
-    this.props.numColumns;
-const styles = StyleSheet.create({
-  itemContainer: {
-    width: size,
-    height: 440,
-    margin: itemMargin,
-  },
-  item: {
-    flex: 1,
-  },
-});
-
 const mapStateToProps = (state) => ({
-  cart: state.stores.cart,
-  activeStore: state.stores.activeStore,
+
 });
 StoreProductListItem = connect(mapStateToProps)(StoreProductListItem);
 export {StoreProductListItem};

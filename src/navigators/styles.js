@@ -3,6 +3,25 @@ import {MadeHeaderLogo} from '../components/common';
 import {Button, Text} from 'native-base';
 import firebase from 'react-native-firebase';
 
+const getHeaderRight = (headerRightButton) => {
+  if (!headerRightButton) return null;
+  if (headerRightButton === 'logOut') {
+    return <Button small style={{alignSelf: 'center', marginRight: 15}}
+                   onPress={() => firebase.auth().
+                       signOut().
+                       then(navigation.navigate('Auth'))}>
+      <Text>Sair</Text>
+    </Button>;
+  }
+  else if (headerRightButton === 'closeStore') {
+    return <Button small style={{alignSelf: 'center', marginRight: 15}}
+                   onPress={() => navigation.goBack()}>
+      <Text>Fechar</Text>
+    </Button>;
+  }
+  return null;
+};
+
 export default ({navigation}) => {
   const params = navigation.state.params || {};
   return {
@@ -22,13 +41,6 @@ export default ({navigation}) => {
     headerTitleStyle: {
       fontWeight: 'bold',
     },
-    headerRight: (params.showLogOut ?
-        <Button small style={{alignSelf: 'center', marginRight: 15}}
-                onPress={() => firebase.auth().
-                    signOut().
-                    then(navigation.navigate('Auth'))}>
-          <Text>Sair</Text>
-        </Button> : null
-    ),
+    headerRight: getHeaderRight(params.headerRightButton),
   };
 };

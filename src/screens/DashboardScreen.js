@@ -39,7 +39,7 @@ class DashboardScreen extends React.Component {
     this.unsubscribeCatalog = dispatch(actions.stores.loadCatalog());
 
     // Set a param to show the logout button on the right
-    this.props.navigation.setParams({ showLogOut: true });
+    this.props.navigation.setParams({ headerRightButton: 'logOut' });
 
   }
 

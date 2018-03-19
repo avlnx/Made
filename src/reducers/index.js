@@ -1,8 +1,8 @@
 import auth from './auth';
 import ui from './ui';
 import stores from './stores';
-import thunkMiddleware from 'redux-thunk/index';
-import {applyMiddleware, combineReducers, createStore} from 'redux/index';
+import thunkMiddleware from 'redux-thunk';
+import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {createLogger} from 'redux-logger';
 
 const reducers = {

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Content,H1,H2,View,Button,Text,Icon} from 'native-base';
 import {ProductQuantityList} from '.';
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   title: {
