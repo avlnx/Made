@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dimensions, StyleSheet, Image} from 'react-native';
+import {StyleSheet, Image} from 'react-native';
 import {
   View,
   Card,
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 class StoreProductListItem extends Component {
 
   render() {
-    const {item, getCurrentQuantityIn, itemWidth, itemMargin} = this.props;
+    const {item, getCurrentQuantityIn, itemWidth, itemMargin, updateAction} = this.props;
     return (
         <View style={[styles.itemContainer, {width: itemWidth, margin: itemMargin}]}>
           <Card style={styles.item}>
@@ -54,13 +54,13 @@ class StoreProductListItem extends Component {
                     <Button
                         disabled={!getCurrentQuantityIn('cart', item.id)}
                         style={{marginRight: 10}}
-                        onPress={() => this.props.updateAction(item, '-')}>
+                        onPress={() => updateAction(item, '-')}>
                       <Icon name='remove'/>
                     </Button>
                     <Button
                         disabled={getCurrentQuantityIn('inventory', item.id) ===
                         getCurrentQuantityIn('cart', item.id)}
-                        onPress={() => this.props.updateAction(item, '+')}>
+                        onPress={() => updateAction(item, '+')}>
                       <Icon name='add'/>
                     </Button>
                   </View>
@@ -85,7 +85,7 @@ class StoreProductListItem extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+  cart: state.stores.cart,
 });
 StoreProductListItem = connect(mapStateToProps)(StoreProductListItem);
 export {StoreProductListItem};
