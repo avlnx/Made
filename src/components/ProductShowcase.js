@@ -2,26 +2,17 @@ import React, {Component} from 'react';
 import {StyleSheet, Image} from 'react-native';
 import {
   View,
-  Text,
-  Button,
   H1,
   H2,
   H3,
-  Icon,
-  Card,
-  CardItem,
 } from 'native-base';
 import variables from '../../native-base-theme/variables/commonColor';
 
 class ProductShowcase extends Component {
   render() {
-    const {product, cancelAction} = this.props;
+    const {product} = this.props;
     return (
-        <View style={styles.outerContainer}>
-          <Button style={styles.closeButton} light icon onPress={() => cancelAction()}>
-            <Icon name={'close'}/>
-          </Button>
-          <Card><CardItem>
+        <View style={styles.container}>
           <View style={styles.column}>
             <Image source={{uri: product.image}}
                    style={styles.productImage}/>
@@ -30,19 +21,16 @@ class ProductShowcase extends Component {
             <H1>{product.title}</H1>
             <H3 style={styles.productDescription}>{product.description}</H3>
           </View>
-            <H2 style={styles.productPrice}>R$ {product.publicPrice}</H2>
-          </CardItem></Card>
+          <H2 style={styles.productPrice}>R$ {product.publicPrice}</H2>
         </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  outerContainer: {
+  container: {
     flex: 1,
     flexDirection: 'row',
-    margin: 15,
-    paddingTop: 40,
   },
   column: {
     flex: 1,
@@ -67,11 +55,6 @@ const styles = StyleSheet.create({
   productDescription: {
     marginTop: 15,
   },
-  closeButton: {
-    position: 'absolute',
-    top: 5,
-    right: 5,
-  }
 });
 
 export {ProductShowcase};

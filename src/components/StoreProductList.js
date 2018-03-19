@@ -6,6 +6,7 @@ import actions from '../reducers/actions';
 
 import {View, Text, Button} from 'native-base';
 import {ProductShowcase} from './';
+import {LightBox} from './common';
 
 class StoreProductList extends Component {
   constructor() {
@@ -44,9 +45,10 @@ class StoreProductList extends Component {
     const itemWidth = (Dimensions.get('window').width - (itemMargin * 4)) /
         numColumns;
     if (this.state.showcaseProduct) return (
-        <ProductShowcase product={this.state.showcaseProduct}
-                         cancelAction={() => this.setState(
-                             {showcaseProduct: null})}/>
+        <LightBox cancelAction={() => this.setState(
+            {showcaseProduct: null})}>
+          <ProductShowcase product={this.state.showcaseProduct}/>
+        </LightBox>
     );
     return (
         <FlatList
