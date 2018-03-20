@@ -15,7 +15,7 @@ const getHeaderRight = (headerRightButton) => {
   }
   else if (headerRightButton === 'closeStore') {
     return <Button small style={{alignSelf: 'center', marginRight: 15}}
-                   onPress={() => navigation.goBack()}>
+                   onPress={() => navigation.navigate('StoreLogOut')}>
       <Text>Fechar</Text>
     </Button>;
   }

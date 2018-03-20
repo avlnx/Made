@@ -23,7 +23,7 @@ const WelcomeWrapper = (props) => {
     lostPasswordMode,
   } = props;
   return (
-      <View style={styles.containerStyle}>
+      <View style={styles.container}>
         <View style={styles.logoWrapper}>
           <MadeHeaderLogo style={styles.logo}/>
         </View>

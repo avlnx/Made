@@ -24,7 +24,7 @@ const stores = {
               // without having to reset to false in firebase all the time. This needs
               // to be fixed before production though. The state prop activeStore needs
               // to be persisted for this to work.
-              {isActive: false},
+              {isActive: true},
           ).
           then(function() {
             // Update redux and set this store as active

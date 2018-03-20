@@ -1,11 +1,14 @@
 import {StackNavigator} from 'react-navigation';
-import {StoreFrontScreen} from '../screens';
+import {StoreFrontScreen, StoreLogOutScreen} from '../screens';
 import navStyles from './styles';
 
 const StoreStack = StackNavigator(
     {
       StoreFront: {
         screen: StoreFrontScreen,
+      },
+      StoreLogOut: {
+        screen: StoreLogOutScreen,
       }
     },
     {

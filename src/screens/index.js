@@ -6,3 +6,4 @@ export * from './DashboardScreen';
 export * from './StoreConfigScreen';
 // store
 export * from './StoreFrontScreen';
+export * from './StoreLogOutScreen';
