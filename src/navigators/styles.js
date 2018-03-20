@@ -3,7 +3,7 @@ import {MadeHeaderLogo} from '../components/common';
 import {Button, Text} from 'native-base';
 import firebase from 'react-native-firebase';
 
-const getHeaderRight = (headerRightButton) => {
+const getHeaderRight = (headerRightButton, navigation) => {
   if (!headerRightButton) return null;
   if (headerRightButton === 'logOut') {
     return <Button small style={{alignSelf: 'center', marginRight: 15}}
@@ -41,6 +41,6 @@ export default ({navigation}) => {
     headerTitleStyle: {
       fontWeight: 'bold',
     },
-    headerRight: getHeaderRight(params.headerRightButton),
+    headerRight: getHeaderRight(params.headerRightButton, navigation),
   };
 };
