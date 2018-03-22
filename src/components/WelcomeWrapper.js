@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   container: {flex: 1, flexDirection: 'row', padding: 15},
   logoWrapper: {flex: 1, padding: 30, justifyContent: 'center'},
   logo: {height: 150, width: 300},
-  formWrapper: {flex: 1}
+  formWrapper: {flex: 1},
 });
 
 const WelcomeWrapper = (props) => {
@@ -21,6 +21,7 @@ const WelcomeWrapper = (props) => {
     toggleLostPasswordModeAction,
     sendPasswordRecoveryEmailAction,
     lostPasswordMode,
+    loginMessage,
   } = props;
   return (
       <View style={styles.container}>
@@ -35,7 +36,8 @@ const WelcomeWrapper = (props) => {
                      updateUserPasswordInput={updateUserPasswordInput}
                      toggleLostPasswordModeAction={toggleLostPasswordModeAction}
                      sendPasswordRecoveryEmailAction={sendPasswordRecoveryEmailAction}
-                     lostPasswordMode={lostPasswordMode}/>
+                     lostPasswordMode={lostPasswordMode}
+                     loginMessage={loginMessage}/>
         </View>
       </View>
   );

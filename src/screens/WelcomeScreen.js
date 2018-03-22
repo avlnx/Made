@@ -33,11 +33,9 @@ class WelcomeScreen extends React.Component {
         signInAndRetrieveDataWithEmailAndPassword(email, password).
         catch((e) => {
           alert(e);
-          // dispatch(actions.ui.stopLoading());
           this.setState({loadingMessage: null});
         }).
         then((user) => {
-          // dispatch(actions.ui.stopLoading());
           if (user) this.props.navigation.navigate('App');
         });
   }
@@ -80,7 +78,8 @@ class WelcomeScreen extends React.Component {
                   this)}
               sendPasswordRecoveryEmailAction={this.sendPasswordRecoveryEmail.bind(
                   this)}
-              lostPasswordMode={this.state.lostPasswordMode}/>
+              lostPasswordMode={this.state.lostPasswordMode}
+              loginMessage={'Faça login para personalizar sua experiência'}/>
         </Container>
     );
   }

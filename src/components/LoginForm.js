@@ -25,12 +25,12 @@ class LoginForm extends Component {
       toggleLostPasswordModeAction,
       sendPasswordRecoveryEmailAction,
       lostPasswordMode,
+      loginMessage,
     } = this.props;
 
     return (
         <View style={{flex: 1, justifyContent: 'center', paddingTop: 90}}>
-          <H1>Faça
-            login para personalizar sua experiência</H1>
+          <H1>{loginMessage}</H1>
           <Form>
             <Item>
               <Label>Email</Label>
@@ -41,7 +41,8 @@ class LoginForm extends Component {
                   autoCapitalize={'none'}/>
             </Item>
             {lostPasswordMode ?
-                <Text style={{marginVertical: 15}}>Preencha seu email e clique em "Recuperar Senha". Nós
+                <Text style={{marginVertical: 15}}>Preencha seu email e clique
+                  em "Recuperar Senha". Nós
                   te enviaremos um email com instruções para restaurar seu
                   acesso.</Text> :
                 <Item last style={{marginBottom: 15}}>
@@ -60,11 +61,13 @@ class LoginForm extends Component {
               <Text>{lostPasswordMode ? 'Recuperar Senha' : 'Entrar'}</Text>
               <Icon name='arrow-forward'/>
             </Button>
-            <Button transparent onPress={toggleLostPasswordModeAction}>
-              <Text>{lostPasswordMode ?
-                  'Cancelar' :
-                  'Esqueci minha senha :('}</Text>
-            </Button>
+            {toggleLostPasswordModeAction ?
+                <Button transparent onPress={toggleLostPasswordModeAction}>
+                  <Text>{lostPasswordMode ?
+                      'Cancelar' :
+                      'Esqueci minha senha :('}</Text>
+                </Button>
+                : null}
           </Form>
         </View>
     );

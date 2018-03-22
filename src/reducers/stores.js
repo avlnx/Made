@@ -1,23 +1,5 @@
 import * as types from './actions/actionTypes';
 
-// TODO: remove
-activeStore = {
-  id: 'lPTYFNdFKQrNwOWfwuDU',
-  inventory:
-      {
-        'PnQEwlAbzFGQt9FCzhtv': 3,
-        'kotEfz2Ziq7FxtbFRQZb': 15,
-        'q6Za97zoNo1xy6ZTKyta': 0,
-      },
-  isActive: false,
-  nickname: 'Easynvest',
-};
-
-// let cart = {
-//   'PnQEwlAbzFGQt9FCzhtv': 1,
-//   'kotEfz2Ziq7FxtbFRQZb': 2,
-// };
-
 const initialCartState = {
   totalQuantity: 0,
   totalPrice: 0,
@@ -25,7 +7,7 @@ const initialCartState = {
 
 const initialState = {
   storeList: [],
-  activeStore: null,//'lPTYFNdFKQrNwOWfwuDU',  // TODO: set to null and persist state
+  activeStore: null,
   catalog: [],
   productListInStock: [],
   cart: initialCartState,

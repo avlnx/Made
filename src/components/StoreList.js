@@ -16,7 +16,7 @@ import {
 } from 'native-base';
 // TODO use FlatList
 const StoreList = (props) => {
-  const {items, actionActivate, storeConfigAction} = props;
+  const {items, actionActivate, storeConfigAction, deactivateAllStoresAction} = props;
   return (
       <View>
         <H1 style={{padding: 20, paddingBottom: 0}}>SUAS LOJAS</H1>
@@ -53,6 +53,11 @@ const StoreList = (props) => {
                   </ListItem>
               }>
         </List>
+        <View style={{paddingHorizontal: 20}}>
+          <Button danger onPress={() => deactivateAllStoresAction()}>
+            <Text>Desativar todas as lojas</Text>
+          </Button>
+        </View>
       </View>
   );
 };

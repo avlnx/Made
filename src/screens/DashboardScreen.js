@@ -2,6 +2,7 @@ import React from 'react';
 import {Container, Content} from 'native-base';
 import actions from '../reducers/actions';
 import {StoreList} from '../components';
+import {Loading} from '../components/common';
 import firebase from 'react-native-firebase';
 import {connect} from 'react-redux';
 
@@ -11,6 +12,9 @@ class DashboardScreen extends React.Component {
     super();
     // get a db reference
     this.db = firebase.firestore();
+    this.state = {
+      loadingMessage: null,
+    }
   }
 
   componentWillMount() {
@@ -39,7 +43,7 @@ class DashboardScreen extends React.Component {
     this.unsubscribeCatalog = dispatch(actions.stores.loadCatalog());
 
     // Set a param to show the logout button on the right
-    this.props.navigation.setParams({ headerRightButton: 'logOut' });
+    this.props.navigation.setParams({headerRightButton: 'logOut'});
 
   }
 
@@ -56,18 +60,48 @@ class DashboardScreen extends React.Component {
 
   storeConfigAction(store) {
     this.props.navigation.navigate('StoreConfig', {
-      storeId: store.id
+      storeId: store.id,
     });
+  }
+
+  deactivateAllStores() {
+    this.setState({loadingMessage: 'Desativando todas as lojas'});
+    const uid = firebase.auth().currentUser.uid;
+    // Get a new write batch
+    let batch = firebase.firestore().batch();
+
+    this.props.stores.forEach((value) => {
+      storeId = value.id;
+      let storeRef = firebase.firestore().
+          collection('users').
+          doc(uid).
+          collection('stores').
+          doc(storeId);
+      batch.update(storeRef, {isActive: false});
+    }, this);
+
+    // Commit the batch
+    batch.commit().then(() => {
+      console.log('Stores deactivated');
+      // alert('Todas as lojas foram desativadas.');
+    }).catch((e) => {
+      alert('ERROR: ' + e);
+    }).finally(() => {
+      this.setState({loadingMessage: null});
+    })
   }
 
   render() {
     const {stores} = this.props;
+    if (this.state.loadingMessage) return <Loading message={this.state.loadingMessage} />;
     return (
         <Container>
           <Content>
             <StoreList items={stores}
                        actionActivate={this.activateStore.bind(this)}
-                       storeConfigAction={this.storeConfigAction.bind(this)}/>
+                       storeConfigAction={this.storeConfigAction.bind(this)}
+                       deactivateAllStoresAction={this.deactivateAllStores.bind(
+                           this)}/>
           </Content>
         </Container>
     );
