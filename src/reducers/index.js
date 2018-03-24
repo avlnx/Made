@@ -7,11 +7,12 @@ import {createLogger} from 'redux-logger';
 // redux-persist
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
+// Reactotron dev app
+import Reactotron from 'reactotron-react-native';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['stores.activeStore']
 };
 
 const reducers = {
@@ -26,7 +27,13 @@ const persistedReducer = persistReducer(persistConfig, reducer);
 
 const loggerMiddleware = createLogger();
 
-let store = createStore(persistedReducer,
+// let store = createStore(persistedReducer,
+//     applyMiddleware(
+//         thunkMiddleware,
+//         loggerMiddleware,
+//     ));
+
+let store = Reactotron.createStore(persistedReducer,
     applyMiddleware(
         thunkMiddleware,
         loggerMiddleware,

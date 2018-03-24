@@ -82,8 +82,7 @@ class DashboardScreen extends React.Component {
 
     // Commit the batch
     batch.commit().then(() => {
-      console.log('Stores deactivated');
-      // alert('Todas as lojas foram desativadas.');
+      // console.log('Stores deactivated');
     }).catch((e) => {
       alert('ERROR: ' + e);
     }).finally(() => {

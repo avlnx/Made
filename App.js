@@ -1,4 +1,8 @@
+// Reactotron
+import './ReactotronConfig';
+
 import React from 'react';
+import {StatusBar} from 'react-native';
 // Theming
 import {StyleProvider} from 'native-base';
 import getTheme from './native-base-theme/components';
@@ -18,6 +22,7 @@ export default class App extends React.Component {
           <Provider store={store}>
             <PersistGate loading={<Loading message={'Recuperando seus dados'}/>}
                          persistor={persistor}>
+              <StatusBar hidden />
               <RootStack/>
             </PersistGate>
           </Provider>

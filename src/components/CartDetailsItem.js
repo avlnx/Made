@@ -10,7 +10,7 @@ class CartDetailsItem extends Component {
         <View style={styles.container}>
           <View style={styles.titleContainer}>
             <Badge primary style={styles.badgeStyle}>
-              <Text>{item.quantityInCart}</Text>
+              <Text style={{color: 'black'}}>{item.quantityInCart}</Text>
             </Badge>
             <H3>{item.title}</H3>
           </View>
