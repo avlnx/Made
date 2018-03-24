@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {StyleSheet, FlatList} from 'react-native';
-import {Text, View} from 'native-base';
+import {Button, Text, View, Icon} from 'native-base';
 import {connect} from 'react-redux';
 import {CartDetailsItem} from './';
+import actions from '../reducers/actions';
 
 class CartDetails extends Component {
   constructor() {
@@ -40,8 +41,13 @@ class CartDetails extends Component {
 
   }
 
+  clearCart() {
+    const {dispatch} = this.props;
+    dispatch(actions.stores.clearCart());
+  }
+
   render() {
-    if (!this.state.productsInCart) return null;
+    if (!this.state.productsInCart.length) return null;
     return (
         <View>
           <FlatList
@@ -49,6 +55,10 @@ class CartDetails extends Component {
           extraData={this.props.cart}
           keyExtractor={item => item.id}
           renderItem={({item}) => <CartDetailsItem item={item}/>}/>
+          <Button iconLeft block small danger onPress={() => this.clearCart()}>
+            <Icon name={'close'} />
+            <Text>Limpar Carrinho</Text>
+          </Button>
         </View>
     );
   }
