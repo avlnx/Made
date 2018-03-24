@@ -47,16 +47,16 @@ class CartDetails extends Component {
   }
 
   render() {
-    if (!this.state.productsInCart.length) return null;
+    if (!this.props.cart.totalQuantity) return null;
     return (
         <View>
           <FlatList
-          data={this.state.productsInCart}
-          extraData={this.props.cart}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => <CartDetailsItem item={item}/>}/>
+              data={this.state.productsInCart}
+              extraData={this.props.cart}
+              keyExtractor={item => item.id}
+              renderItem={({item}) => <CartDetailsItem item={item}/>}/>
           <Button iconLeft block small danger onPress={() => this.clearCart()}>
-            <Icon name={'close'} />
+            <Icon name={'close'}/>
             <Text>Limpar Carrinho</Text>
           </Button>
         </View>
