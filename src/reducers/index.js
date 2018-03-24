@@ -32,8 +32,9 @@ const loggerMiddleware = createLogger();
 //         thunkMiddleware,
 //         loggerMiddleware,
 //     ));
+let createStore = __DEV__ ? Reactotron.createStore : createStore;
 
-let store = Reactotron.createStore(persistedReducer,
+let store = createStore(persistedReducer,
     applyMiddleware(
         thunkMiddleware,
         loggerMiddleware,
