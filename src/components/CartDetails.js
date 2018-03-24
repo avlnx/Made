@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, FlatList} from 'react-native';
 import {Text, View} from 'native-base';
 import {connect} from 'react-redux';
+import {CartDetailsItem} from './';
 
 class CartDetails extends Component {
   constructor() {
@@ -21,7 +22,7 @@ class CartDetails extends Component {
     Object.keys(cart).map(key => {
       if (key !== 'totalPrice' && key !== 'totalQuantity') {
         productsInCart.push({
-          quantity: cart[key],
+          quantityInCart: cart[key],
           id: key,
         });
       }
@@ -40,25 +41,20 @@ class CartDetails extends Component {
   }
 
   render() {
-    if (!this.state.productsInCart) return <View><Text>Carrinho Vazio</Text></View>;
+    if (!this.state.productsInCart) return null;
     return (
-        <View style={styles.container}>
-          <Text>{this.props.cart.totalQuantity} Products in cart</Text>
+        <View>
           <FlatList
           data={this.state.productsInCart}
           extraData={this.props.cart}
           keyExtractor={item => item.id}
-          renderItem={({item}) => <Text>Item: {item.id}</Text>}/>
+          renderItem={({item}) => <CartDetailsItem item={item}/>}/>
         </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 15,
-  }
-});
+const styles = StyleSheet.create({});
 
 const mapStateToProps = (state) => ({
   cart: state.stores.cart,
