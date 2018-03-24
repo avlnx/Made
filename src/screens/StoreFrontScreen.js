@@ -6,7 +6,7 @@ import {
 import {connect} from 'react-redux';
 import actions from '../reducers/actions';
 import firebase from 'react-native-firebase';
-import {StoreProductList, CartWidget} from '../components';
+import {StoreProductList, CartWidget, CartDetails} from '../components';
 
 class StoreFrontScreen extends React.Component {
 
@@ -54,6 +54,7 @@ class StoreFrontScreen extends React.Component {
             <StoreProductList/>
           </Content>
           <CartWidget/>
+          <CartDetails />
         </Container>
     );
   }

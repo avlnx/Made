@@ -11,6 +11,7 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: ['stores.activeStore']
 };
 
 const reducers = {
