@@ -27,14 +27,9 @@ const persistedReducer = persistReducer(persistConfig, reducer);
 
 const loggerMiddleware = createLogger();
 
-// let store = createStore(persistedReducer,
-//     applyMiddleware(
-//         thunkMiddleware,
-//         loggerMiddleware,
-//     ));
-let createStore = __DEV__ ? Reactotron.createStore : createStore;
+let properStore = __DEV__ ? Reactotron.createStore : createStore;
 
-let store = createStore(persistedReducer,
+let store = properStore(persistedReducer,
     applyMiddleware(
         thunkMiddleware,
         loggerMiddleware,
