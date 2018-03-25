@@ -2,6 +2,12 @@ import React from 'react';
 import {
   Container,
   Content,
+  Tab,
+  Tabs,
+  TabHeading,
+  Icon,
+  Text,
+  View,
 } from 'native-base';
 import {connect} from 'react-redux';
 import actions from '../reducers/actions';
@@ -17,7 +23,7 @@ class StoreFrontScreen extends React.Component {
 
   componentWillMount() {
     // Set a param to show the logout button on the right
-    this.props.navigation.setParams({ headerRightButton: 'closeStore' });
+    this.props.navigation.setParams({headerRightButton: 'closeStore'});
   }
 
   componentDidMount() {
@@ -50,11 +56,20 @@ class StoreFrontScreen extends React.Component {
   render() {
     return (
         <Container>
-          <Content>
-            <StoreProductList/>
-          </Content>
+          <Tabs>
+            <Tab heading={"BARCODE"}>
+              <View style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}><Text>BARCODE</Text></View>
+            </Tab>
+            <Tab heading={"LISTA"}>
+              <StoreProductList/>
+            </Tab>
+          </Tabs>
           <CartWidget/>
-          <CartDetails />
+          <CartDetails/>
         </Container>
     );
   }
