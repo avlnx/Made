@@ -98,6 +98,9 @@ export default {
   // brandPrimary: platform === "ios" ? "#007aff" : "#3F51B5",
   // brandPrimary: "#2ECC71",
   brandPrimary: "#2ECC71",
+  brandPrimarySlightlyDark: "#15B358",
+  brandPrimaryMedium: "#008025",
+  brandPrimaryDark: "#004D00",
   brandInfo: "#62B1F6",
   brandSuccess: "#5cb85c",
   brandDanger: "#d9534f",
@@ -210,14 +213,14 @@ export default {
   inverseSpinnerColor: "#1A191B",
 
   // Tab
-  tabDefaultBg: platform === "ios" ? this.brandPrimary : this.brandPrimary,
+  tabDefaultBg: platform === "ios" ? this.brandPrimaryMedium : this.brandPrimaryMedium,
   topTabBarTextColor: platform === "ios" ? '#fff' : '#fff',
   topTabBarActiveTextColor: platform === "ios" ? this.inverseTextColor : this.inverseTextColor,
-  topTabBarBorderColor: platform === "ios" ? "#fff" : "#fff",
-  topTabBarActiveBorderColor: platform === "ios" ? "#fff" : "#fff",
+  topTabBarBorderColor: platform === "ios" ? this.brandPrimary : this.brandPrimary,
+  topTabBarActiveBorderColor: platform === "ios" ? this.brandPrimary : this.brandPrimary,
 
   // Tabs
-  tabBgColor: this.brandPrimary,
+  tabBgColor: this.brandPrimaryMedium,
   tabFontSize: 18,
 
   // Text

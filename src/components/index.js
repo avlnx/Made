@@ -1,6 +1,7 @@
 export * from './LoginForm';
 export * from './StoreList';
 export * from './StoreProductList';
+export * from './BarcodeReader';
 export * from './ProductShowcase';
 export * from './StoreProductListItem';
 export * from './CartWidget';

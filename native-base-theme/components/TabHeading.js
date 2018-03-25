@@ -1,4 +1,4 @@
-import variable from "./../variables/platform";
+import variable from "./../variables/commonColor";
 
 export default (variables = variable) => {
   const platform = variables.platform;

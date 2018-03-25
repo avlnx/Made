@@ -1,4 +1,4 @@
-import variable from "./../variables/platform";
+import variable from "./../variables/commonColor";
 import { Platform } from "react-native";
 
 export default (variables = variable) => {

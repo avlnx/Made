@@ -1,18 +1,16 @@
 import React from 'react';
 import {
   Container,
-  Content,
   Tab,
   Tabs,
-  TabHeading,
-  Icon,
-  Text,
-  View,
 } from 'native-base';
 import {connect} from 'react-redux';
 import actions from '../reducers/actions';
 import firebase from 'react-native-firebase';
-import {StoreProductList, CartWidget, CartDetails} from '../components';
+import {
+  StoreProductList, CartWidget, CartDetails,
+  BarcodeReader, BarcodeReader,
+} from '../components';
 
 class StoreFrontScreen extends React.Component {
 
@@ -58,11 +56,7 @@ class StoreFrontScreen extends React.Component {
         <Container>
           <Tabs>
             <Tab heading={"BARCODE"}>
-              <View style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}><Text>BARCODE</Text></View>
+              <BarcodeReader/>
             </Tab>
             <Tab heading={"LISTA"}>
               <StoreProductList/>
