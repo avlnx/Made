@@ -77,7 +77,7 @@ class StoreLogOutScreen extends Component {
                        sendPasswordRecoveryEmailAction={undefined}
                        lostPasswordMode={undefined}
                        loginMessage={'Confirme suas credenciais para fechar a loja'}/>
-            <Button iconLeft primary light
+            <Button iconLeft primary light block small
                     onPress={() => this.props.navigation.goBack()}>
               <Icon name={'arrow-back'}/>
               <Text>Cancelar</Text>

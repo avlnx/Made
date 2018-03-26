@@ -55,11 +55,11 @@ class StoreFrontScreen extends React.Component {
     return (
         <Container>
           <Tabs>
-            <Tab heading={"BARCODE"}>
-              <BarcodeReader/>
-            </Tab>
             <Tab heading={"LISTA"}>
               <StoreProductList/>
+            </Tab>
+            <Tab heading={"BARCODE"}>
+              <BarcodeReader/>
             </Tab>
           </Tabs>
           <CartWidget/>

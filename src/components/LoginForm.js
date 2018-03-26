@@ -58,7 +58,7 @@ class LoginForm extends Component {
                     onPress={lostPasswordMode ?
                         sendPasswordRecoveryEmailAction :
                         loginUserAction}>
-              <Text>{lostPasswordMode ? 'Recuperar Senha' : 'Entrar'}</Text>
+              <Text>{lostPasswordMode ? 'Recuperar Senha' : 'Confirmar'}</Text>
               <Icon name='arrow-forward'/>
             </Button>
             {toggleLostPasswordModeAction ?
