@@ -31,3 +31,14 @@ allprojects {
         maven { url "https://jitpack.io" }
     }
 }
+
+/**
+* Project-wide gradle configuration properties for use by all modules
+*/
+ext {
+    compileSdkVersion           = 25
+    targetSdkVersion            = 22
+    buildToolsVersion           = "25.0.3"
+    googlePlayServicesVersion   = "11.8.0"
+    supportLibVersion           = "26.0.1"
+}
