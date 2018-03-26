@@ -9,7 +9,7 @@ import actions from '../reducers/actions';
 import firebase from 'react-native-firebase';
 import {
   StoreProductList, CartWidget, CartDetails,
-  BarcodeReader, BarcodeReader,
+  BarcodeReader,
 } from '../components';
 
 class StoreFrontScreen extends React.Component {

@@ -5,7 +5,7 @@ export default (variables = variable) => {
 
   const tabHeadingTheme = {
     flexDirection: "row",
-    backgroundColor: variables.tabDefaultBg,
+    backgroundColor: variables.brandPrimarySlightlyDark,
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -29,7 +29,9 @@ export default (variables = variable) => {
       },
       "NativeBase.Icon": {
         color: variables.topTabBarActiveTextColor
-      }
+      },
+      borderBottomWidth: 3,
+      borderBottomColor: variables.brandPrimary,
     }
   };
 

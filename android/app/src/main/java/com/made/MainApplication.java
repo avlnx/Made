@@ -3,6 +3,7 @@ package com.made;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.reactnative.camera.RNCameraPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
               new MainReactPackage(),
+            new RNCameraPackage(),
             new RNSpinkitPackage(),
             new RNFirebasePackage(),
               new RNFirebaseAuthPackage(),

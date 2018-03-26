@@ -217,7 +217,7 @@ export default {
   topTabBarTextColor: platform === "ios" ? '#fff' : '#fff',
   topTabBarActiveTextColor: platform === "ios" ? this.inverseTextColor : this.inverseTextColor,
   topTabBarBorderColor: platform === "ios" ? this.brandPrimary : this.brandPrimary,
-  topTabBarActiveBorderColor: platform === "ios" ? this.brandPrimary : this.brandPrimary,
+  topTabBarActiveBorderColor: platform === "ios" ? this.brandPrimaryMedium : this.brandPrimaryMedium,
 
   // Tabs
   tabBgColor: this.brandPrimaryMedium,

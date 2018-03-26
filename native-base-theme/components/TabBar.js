@@ -38,7 +38,7 @@ export default (variables = variable) => {
       justifyContent: "center",
       borderRadius: null,
       borderBottomColor: "transparent",
-      backgroundColor: variables.tabBgColor
+      backgroundColor: variables.brandPrimaryMedium
     },
     height: 45,
     flexDirection: "row",
@@ -47,8 +47,8 @@ export default (variables = variable) => {
     borderTopWidth: 0,
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    borderBottomColor: variables.topTabBarActiveBorderColor,
-    backgroundColor: variables.tabBgColor
+    borderBottomColor: variables.brandPrimaryDark,
+    backgroundColor: variables.brandPrimaryMedium
   };
 
   return tabBarTheme;
