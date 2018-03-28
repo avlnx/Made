@@ -1,5 +1,5 @@
 import React from 'react';
-import {Content,H1,H2,View,Button,Text,Icon} from 'native-base';
+import {Content,H1,H2,View,Button,Text,Icon, Card, CardItem,Form,Item,Label,Input} from 'native-base';
 import {ProductQuantityList} from '.';
 import {StyleSheet} from 'react-native';
 
@@ -20,7 +20,7 @@ const StoreConfigForm = (props) => {
               <Item>
                 <Label>Apelido da sua loja</Label>
                 <Input
-                    value={this.state.nickname}
+                    value={nickname}
                     onChangeText={nickname => this.updateNicknameInput(
                         nickname)}
                     autoCorrect={false}/>

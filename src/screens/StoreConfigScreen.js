@@ -117,7 +117,7 @@ class StoreConfigScreen extends Component {
               nickname={this.state.nickname}
               data={this.state.storesInventory}
               saveAction={this.saveStoreData.bind(this)}
-              cancelAction={this.props.navigation.goBack()}
+              cancelAction={this.props.navigation.goBack}
           />
         </Container>
     );
