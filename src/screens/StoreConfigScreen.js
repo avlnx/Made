@@ -114,6 +114,7 @@ class StoreConfigScreen extends Component {
           <StoreConfigForm
               updateQuantityForProduct={this.updateQuantityForProduct.bind(
                   this)}
+              updateNickname={this.updateNicknameInput.bind(this)}
               nickname={this.state.nickname}
               data={this.state.storesInventory}
               saveAction={this.saveStoreData.bind(this)}

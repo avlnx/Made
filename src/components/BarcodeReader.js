@@ -3,32 +3,24 @@ import {View,Text} from 'native-base';
 import { RNCamera } from 'react-native-camera';
 import {StyleSheet} from 'react-native';
 
-/*
-<RNCamera
-              ref={ref => {
-                this.camera = ref;
-              }}
-              type={RNCamera.Constants.Type.front}
-              flashMode={RNCamera.Constants.FlashMode.off}
-              permissionDialogTitle={'Precisamos acessar a câmera'}
-              permissionDialogMessage={'Libere acesso à câmera para ler códigos de barra'}
-          />
- */
 class BarcodeReader extends Component {
-  cameraReady() {
-    alert('Camera is ready dude.');
+
+  barCodeRead(e) {
+    alert(e.data);
   }
+
   render() {
     return (
         <View style={styles.container}>
+          <Text>What's happening</Text>
           <RNCamera
               ref={ref => {
                 this.camera = ref;
               }}
-              onCameraReady={() => this.cameraReady()}
+              autoFocus={RNCamera.Constants.AutoFocus.on}
+              onBarCodeRead={this.barCodeRead.bind(this)}
               style={styles.preview}
               type={RNCamera.Constants.Type.front}
-              flashMode={RNCamera.Constants.FlashMode.off}
               permissionDialogTitle={'Precisamos acessar a câmera'}
               permissionDialogMessage={'Libere acesso à câmera para ler códigos de barra'}
           />

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 });
 
 const StoreConfigForm = (props) => {
-  const {updateQuantityForProduct, nickname, data, saveAction, cancelAction} = props;
+  const {updateQuantityForProduct, nickname, data, saveAction, cancelAction, updateNickname} = props;
   return (
       <Content padder>
         <H1 style={styles.title}>Editando {nickname}</H1>
@@ -21,7 +21,7 @@ const StoreConfigForm = (props) => {
                 <Label>Apelido da sua loja</Label>
                 <Input
                     value={nickname}
-                    onChangeText={nickname => this.updateNicknameInput(
+                    onChangeText={nickname => updateNickname(
                         nickname)}
                     autoCorrect={false}/>
               </Item>
